@@ -1,6 +1,7 @@
 import React from 'react';
 import "../../Styles/Layouts/Layouts.scss";
 import useData from '../../hooks/useData/UseData';
+import Post from './Post/Post';
 
 const Home = () => {
   const data = useData();
@@ -8,7 +9,7 @@ const Home = () => {
     <>
       <article>
         <section className="container">
-          
+          <Post />
         </section>
       </article>
     </>
