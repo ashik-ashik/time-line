@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
+import DataProvider from "./context/DataProvider/DataProvider";
+import Home from "./Components/Home/Home";
+import TimeLine from "./Components/TimeLine/TimeLine";
+import Dairy from "./Components/Dairy/Dairy";
+import Header from "./Components/Common/Header/Header";
+import Footer from "./Components/Common/Footer/Footer";
+import firebaseInit from "./firebase/firebase.init/firebase.init";
 
+  firebaseInit();
+  
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <DataProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/timeline" element={<TimeLine />} />
+          <Route path="/dairy" element={<Dairy />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </DataProvider>
+    </>
   );
 }
 
