@@ -10,7 +10,7 @@ const Footer = () => {
       <small>All Right Reserves <em>Md Ashik Ali</em> &copy; {new Date().getFullYear()}</small>
       &nbsp; &nbsp;
       {
-        user.user === null ? <Link to="/login" >Log In</Link> : <button>Logout</button>
+        user?.user === null ? <Link to="/login" >Log In</Link> : <button onClick={()=> user?.logout()}>Logout</button>
       }
        
     </footer>

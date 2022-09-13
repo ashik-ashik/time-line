@@ -3,4 +3,16 @@ footer{
   text-align: center;
   margin-top: 7px;
   padding: 15px;
+
+  a{
+    text-decoration: none;
+    font-weight: 600;
+    color: darkred;
+  }
+  button{
+    font-weight: 500;
+    font-size: 14px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
 }

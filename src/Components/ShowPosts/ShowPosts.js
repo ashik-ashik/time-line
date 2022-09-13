@@ -16,7 +16,8 @@ const ShowPosts = ({data}) => {
               <hr />
               <div className="post-grid">
                 <div className="user-photo">
-                  <img src={userPhoto} alt="" />
+                  <img src="https://i.postimg.cc/4ND07BXk/mtl.png" alt="" />
+                  {/* <img src={userPhoto} alt="" /> */}
                 </div>
 
                 <div className="post-details">
@@ -25,9 +26,9 @@ const ShowPosts = ({data}) => {
                     <small> Feelings with &mdash;{String.fromCodePoint(post?.postFeeling)}</small>
                   </div>
                   <p className='date-privacy'>
-                    {post?.postDate} 
-                    {String.fromCodePoint(post?.postPrivacy)}
-                    <small style={{marginRight:'8px', display:"inline-block"}}>{post?.postType === "Dairy" ? <>&#128215;</> : <>&#128221;</>}</small>
+                    <span>{post?.postDate} &nbsp;</span>
+                    <span>{String.fromCodePoint(post?.postPrivacy)} &nbsp;</span>
+                    <span style={{marginRight:'8px', display:"inline-block"}}>{post?.postType === "Dairy" ? <>&#128215;</> : <>&#128221;</>}</span>
                     </p>
                   
                   <div className="post-content">
@@ -39,7 +40,7 @@ const ShowPosts = ({data}) => {
                     }
                     
                   </div>
-                  <div className='tags'><Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link></div>
+                  <div className='tags'><Link to={``}>{post?.postTag}</Link></div>
                 </div>
                 
               </div>

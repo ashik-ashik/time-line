@@ -7,7 +7,7 @@ const Post = () => {
   const {setNewPost} = useData();
 
   const [post, setPost] = useState(null);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const postNow = data => {
     data.postDate = new Date().toLocaleDateString();
     setPost(data)
@@ -23,7 +23,10 @@ const Post = () => {
       },
       body : JSON.stringify(post)
     })
-    .then(res => setNewPost(1));
+    .then(res => {
+      setNewPost(1);
+      reset();
+    });
     
   },[post]);
 
@@ -36,7 +39,7 @@ const Post = () => {
           <textarea {...register('postContent', {required: true})} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
           <div className="form-grid">
             <select name="postType" {...register("postType")}>
-              <option value="timeline">&#128221; Time Line</option>
+              <option value="Timeline">&#128221; Time Line</option>
               <option value="Dairy">&#128215; Dairy</option>
             </select>
             <input type="text" {...register("postTag")} name="postTag" placeholder="Tags..." />

@@ -8,6 +8,11 @@
       img{
         width: 50px;
       }
+      @media screen and (max-width: 600px) {
+        img{
+          width: 30px;
+        }
+      }
     }
 
     .post-details{
@@ -21,7 +26,9 @@
 
       .post-content{
         margin-top: 10px;
-
+        p{
+          text-align: justify;
+        }
       }
 
       .tags{
