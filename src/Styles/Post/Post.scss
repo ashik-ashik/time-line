@@ -1,3 +1,17 @@
+
+%formGridSetting {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+@mixin select {
+  outline: none;
+  border: 1px solid #000;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}
+
 #post-form{
   padding: 10px;
 
@@ -12,9 +26,7 @@
       padding: 6px 8px;
     }
     select{
-      outline: none;
-      border: 1px solid #000;
-      font-weight: 600;
+      @include select;
     }
     input.post-title{
       width: 100%;
@@ -34,10 +46,18 @@
       color: #114c8b;
     }
     .form-grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 10px;
+      @extend %formGridSetting;
       margin: 8px 0;
+    }
+    .privacy-feeling{
+      @extend %formGridSetting;
+      margin-bottom: 8px;
+      
+      select{
+        @include select;
+        padding: 5px 10px;
+        margin-top: 5px;
+      }
     }
     .post-btn{
       display: flex;

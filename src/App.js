@@ -7,6 +7,7 @@ import Dairy from "./Components/Dairy/Dairy";
 import Header from "./Components/Common/Header/Header";
 import Footer from "./Components/Common/Footer/Footer";
 import firebaseInit from "./firebase/firebase.init/firebase.init";
+import LogIn from "./Components/Authentication/LogIn/LogIn";
 
   firebaseInit();
   
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/timeline" element={<TimeLine />} />
           <Route path="/dairy" element={<Dairy />} />
+          <Route path="/login" element={<LogIn />} />
         </Routes>
         <Footer />
       </BrowserRouter>

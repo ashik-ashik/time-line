@@ -1,0 +1,30 @@
+.login{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  align-items: center;
+
+  .design-login{
+    img{
+      max-width: 100%;
+    }
+  }
+
+  .login-action{
+    .google-login{
+      outline: none;
+      border: 1px solid #050549;
+      padding: 8px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      // background-color: #050549;
+      color: #040466;
+      transition: all 300ms;
+    }
+    .google-login:hover{
+      background-color: #040466;
+      color: #eee;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.post{
+  .post-grid{
+    padding: 10px 0;
+    margin-bottom: 10px;
+    display: flex;
+    .user-photo{
+      padding-right: 10px;
+      img{
+        width: 50px;
+      }
+    }
+
+    .post-details{
+      .post-header{
+        display: flex;
+        align-items: center;
+        h2{
+          margin-right: 10px;
+        }
+      }
+
+      .post-content{
+        margin-top: 10px;
+
+      }
+
+      .tags{
+        margin-top: 20px;
+        a{
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-block;
+          padding: 3px 10px;
+          border: 1px solid #999999;
+          border-radius: 10px;
+          background: #eee;
+          color: darkred;
+        }
+      }
+    }
+
+  }
+
+}
