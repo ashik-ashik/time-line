@@ -15,12 +15,90 @@
       }
     }
 
+    .date-privacy{
+      span{
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 12px;
+      }
+    }
+
     .post-details{
+      flex-grow: 1;
       .post-header{
         display: flex;
         align-items: center;
+        width: 100%;
         h2{
           margin-right: 10px;
+          font-size: 15px;
+          color: #444444;
+        }
+        .action-option{
+          align-self: flex-end;
+          margin-left: auto;
+          .option{
+            position: relative;
+            cursor: pointer;
+            span{
+              display: inline-block;
+              width: 6px;
+              height: 6px;
+              margin-right: 3px;
+              border-radius: 50%;
+              background-color: #616161;
+              transition: all 300ms;
+            }
+          }
+          .option-container{
+            width: 150px;
+            padding: 15px 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #e7e7e7;
+            border-radius: 5px;
+            display: none;
+            ul{
+              list-style-type: none;
+              li{
+                padding: 5px 10px;
+                font-weight: 600;
+                a{
+                  text-decoration: none;
+                  color: #222;
+                }
+               
+              }
+              li:hover{
+                background: #d6d6d6;
+                color: darkred;
+                a{
+                  color: darkred;
+                }
+              }
+            }
+          }
+          .option:hover{
+            span{
+              background-color: #222;
+            }
+            .option-container{
+              display: block;
+              animation: slowmo .4s ease-in-out forwards;
+            }
+
+            @keyframes slowmo {
+              0%{
+                right: -20px;
+                opacity: 0;
+              }
+              100%{
+                right: 0px;
+                opacity: 1;
+              }
+            }
+          }
         }
       }
 
@@ -28,6 +106,7 @@
         margin-top: 10px;
         p{
           text-align: justify;
+          font-size: 14px;
         }
       }
 
@@ -35,6 +114,7 @@
         margin-top: 20px;
         a{
           text-decoration: none;
+          font-size: 10px;
           font-weight: 600;
           display: inline-block;
           padding: 3px 10px;
@@ -42,6 +122,16 @@
           border-radius: 10px;
           background: #eee;
           color: darkred;
+        }
+      }
+      .admin{
+        width: 100%;
+        margin-top: 10px;
+        text-align: right;
+        a{
+          text-decoration: none;
+          font-weight: 600;
+          color: darkgreen;
         }
       }
     }

@@ -8,6 +8,8 @@ import Header from "./Components/Common/Header/Header";
 import Footer from "./Components/Common/Footer/Footer";
 import firebaseInit from "./firebase/firebase.init/firebase.init";
 import LogIn from "./Components/Authentication/LogIn/LogIn";
+import TaggedPosts from "./Components/TaggedPost/TaggedPosts";
+import EditPost from "./Components/EditPost/EditPost";
 
   firebaseInit();
   
@@ -21,6 +23,8 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/timeline" element={<TimeLine />} />
           <Route path="/dairy" element={<Dairy />} />
+          <Route path="/tags/:tagName" element={<TaggedPosts />} />
+          <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/login" element={<LogIn />} />
         </Routes>
         <Footer />

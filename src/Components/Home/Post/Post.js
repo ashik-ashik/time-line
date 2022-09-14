@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import useData from '../../../hooks/useData/UseData';
 
 const Post = () => {
-  const {setNewPost} = useData();
+  const {setNewPost, user} = useData();
 
   const [post, setPost] = useState(null);
   const { register, handleSubmit, reset } = useForm();
   const postNow = data => {
     data.postDate = new Date().toLocaleDateString();
+    data.postAuthor = user?.user?.displayName;
+    data.authorEmail = user?.user?.email;
     setPost(data)
     console.log(post)
   };
@@ -24,8 +26,11 @@ const Post = () => {
       body : JSON.stringify(post)
     })
     .then(res => {
-      setNewPost(1);
-      reset();
+      if(res.status === 200){
+        setNewPost(1);
+        reset();
+        window.location.reload();
+      }
     });
     
   },[post]);

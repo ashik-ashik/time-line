@@ -7,7 +7,23 @@ const ShowPosts = ({data}) => {
 
   const {user} = useData();
   const userPhoto = user?.user?.photoURL;
-  console.log(user?.user?.displayName);
+  const deletePost = id => {
+    const confirmDelete = window.confirm("Are you Sure??");
+    if(confirmDelete){
+      fetch(`https://radiant-refuge-40674.herokuapp.com/delete/${id}`,{
+        method: "DELETE"
+      })
+      .then(res => res.json())
+      .then(result => {
+        if(result.deletedCount){
+          window.location.reload()
+        }
+        console.log(result);
+      })
+    }
+
+    console.log(id, confirmDelete);
+  }
 
   return (
     <>
@@ -24,12 +40,27 @@ const ShowPosts = ({data}) => {
                   <div className="post-header">
                     <h2>{post?.postTitle} </h2>
                     <small> Feelings with &mdash;{String.fromCodePoint(post?.postFeeling)}</small>
+                    {
+                      user?.user?.email === post?.authorEmail && <div className="action-option" >
+                      <div className='option'>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div className="option-container">
+                          <ul>
+                            <li><Link to={`/edit/${post?._id}`}>Edit</Link></li>
+                            <li onClick={()=>deletePost(post?._id)}>Delete</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    }
                   </div>
-                  <p className='date-privacy'>
-                    <span>{post?.postDate} &nbsp;</span>
-                    <span>{String.fromCodePoint(post?.postPrivacy)} &nbsp;</span>
+                  <div className='date-privacy'>
+                    <span>{post?.postDate}</span>
+                    <span>{String.fromCodePoint(post?.postPrivacy)}</span>
                     <span style={{marginRight:'8px', display:"inline-block"}}>{post?.postType === "Dairy" ? <>&#128215;</> : <>&#128221;</>}</span>
-                    </p>
+                    </div>
                   
                   <div className="post-content">
                     <p >
@@ -40,7 +71,10 @@ const ShowPosts = ({data}) => {
                     }
                     
                   </div>
-                  <div className='tags'><Link to={``}>{post?.postTag}</Link></div>
+                  <div className='tags'><Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link></div>
+                  <div className="admin">
+                    <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{post?.postAuthor}</a></span>
+                  </div>
                 </div>
                 
               </div>

@@ -5,7 +5,7 @@ export const DataContext = new createContext();
 
 const DataProvider = ({children}) => {
   const [data, setData] = useState(null);
-  const [addedNewPost, setNewPost] = useState(0)
+  const [addedNewPost, setNewPost] = useState(false)
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/posts`)
     .then(res => res.json())
