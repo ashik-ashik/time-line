@@ -26,7 +26,7 @@ const EditPost = () => {
       if(result.modifiedCount){
         reset();
         window.alert("The post has been updated successfully");
-        navigate("/")
+        window.location.replace("/");
       }
       console.log(result.modifiedCount)
     })
