@@ -21,9 +21,8 @@ const ShowPosts = ({data}) => {
         console.log(result);
       })
     }
-
-    console.log(id, confirmDelete);
   }
+
 
   return (
     <>
@@ -63,9 +62,9 @@ const ShowPosts = ({data}) => {
                     </div>
                   
                   <div className="post-content">
-                    <p >
-                      {post?.postContent}
-                    </p>
+                    {
+                      post?.postContent?.map((line, i) => <p key={i}>{line}</p> )
+                    }
                     {
                       post?.postImg && <img src={post?.postImg} alt="postImage" />
                     }

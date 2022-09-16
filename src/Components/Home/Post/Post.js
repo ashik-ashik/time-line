@@ -9,39 +9,48 @@ const Post = () => {
   const [post, setPost] = useState(null);
   const { register, handleSubmit, reset } = useForm();
   const postNow = data => {
+    data.postContent = data.postContent.split('\n');
     data.postDate = new Date().toLocaleDateString();
     data.postAuthor = user?.user?.displayName;
     data.authorEmail = user?.user?.email;
     setPost(data)
-    console.log(post)
   };
-
-  useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/post`, {
-      method: "POST",
-      headers : {
-        'Accept' : "application/json",
-        'Content-Type' : "application/json"
-      },
-      body : JSON.stringify(post)
-    })
-    .then(res => {
-      if(res.status === 200){
-        setNewPost(1);
-        reset();
-        window.location.reload();
-      }
-    });
+  
+  // useEffect(()=>{
+    //   fetch(`https://radiant-refuge-40674.herokuapp.com/post`, {
+  //     method: "POST",
+  //     headers : {
+  //       'Accept' : "application/json",
+  //       'Content-Type' : "application/json"
+  //     },
+  //     body : JSON.stringify(post)
+  //   })
+  //   .then(res => {
+  //     if(res.status === 200){
+  //       setNewPost(1);
+  //       reset();
+  //       window.location.reload();
+  //     }
+  //   });
     
-  },[post]);
+  // },[post]);
 
+  const contentWrite = event => {
+    if(event.keyCode === 13){
+      event.target.value = event.target.value + '\n';
+    }
+    // console.log(event.target.value);
+  }
+
+  console.log(post)
   return (
     <>
       <div className="post-form" id='post-form'>
         <h3>Create a post:</h3>
+        
         <form onSubmit={handleSubmit(postNow)}>
           <input {...register('postTitle')} className='post-title' type="text" name="postTitle" placeholder="Post Title &#128221;" />
-          <textarea {...register('postContent', {required: true})} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
+          <textarea onKeyUp={contentWrite} {...register('postContent', {required: true})} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
           <div className="form-grid">
             <select name="postType" {...register("postType")}>
               <option value="Timeline">&#128221; Time Line</option>

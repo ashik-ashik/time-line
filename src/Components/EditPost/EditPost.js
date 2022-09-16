@@ -8,13 +8,13 @@ const EditPost = () => {
   const {postId} = useParams();
   // const [currentPost, setCurrentPost] = useState(null);
   const {data} = useData();
-  const navigate = useNavigate();
   const currentPost = data?.filter(post => post?._id === postId);
   // console.log(currentPost[0]);
 
   const { register, handleSubmit, reset } = useForm();
 
   const updateNow = data => {
+    data.postContent = data.postContent.split('\n');
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -33,6 +33,13 @@ const EditPost = () => {
     console.log(data);
   }
 
+  const contentWrite = event => {
+    if(event.keyCode === 13){
+      event.target.value = event.target.value + '\n';
+    }
+    // console.log(event.target.value);
+  }
+
   console.log(postId);
 
   if(!data){
@@ -45,7 +52,7 @@ const EditPost = () => {
         <h3>Edit post:</h3>
         <form onSubmit={handleSubmit(updateNow)}>
           <input {...register('postTitle')} defaultValue={currentPost[0]?.postTitle} className='post-title' type="text" name="postTitle" placeholder="Post Title &#128221;" />
-          <textarea {...register('postContent', {required: true})} defaultValue={currentPost[0]?.postContent} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
+          <textarea onKeyUp={contentWrite} {...register('postContent', {required: true})} defaultValue={currentPost[0]?.postContent} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
           <div className="form-grid">
             <select name="postType" {...register("postType")}>
               <option selected={currentPost[0]?.postType === 'Timeline' && true}  value="Timeline">&#128221; Time Line</option>

@@ -17,6 +17,7 @@ const Home = () => {
           {
             user?.user && <Post />
           }
+
           {
             data?.length > 0 ? <ShowPosts data={user?.user?.email !== 'ashik.free999@gmail.com' ? publicPosts : data} /> 
               :
