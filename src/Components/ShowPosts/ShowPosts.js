@@ -63,14 +63,14 @@ const ShowPosts = ({data}) => {
                   
                   <div className="post-content">
                     {
-                      post?.postContent?.map((line, i) => <p key={i}>{line}</p> )
+                      post?.postContent?.map((line, i) => line !== '' && <p key={i}>{line}</p> )
                     }
                     {
                       post?.postImg && <img src={post?.postImg} alt="postImage" />
                     }
                     
                   </div>
-                  <div className='tags'><Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link></div>
+                  <div className='tags'>{post?.postTag && <Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link>}</div>
                   <div className="admin">
                     <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{post?.postAuthor}</a></span>
                   </div>

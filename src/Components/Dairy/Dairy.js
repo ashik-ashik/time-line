@@ -3,9 +3,10 @@ import useData from '../../hooks/useData/UseData';
 import ShowPosts from '../ShowPosts/ShowPosts';
 
 const Dairy = () => {
-  const {data, user} = useData();
+  const {data, user, member} = useData();
   const dairy = data?.filter(post => post?.postType?.toLowerCase() === "dairy" );
-  const publicDairy = dairy?.filter(post => post?.postPrivacu === '127758')
+  const showDairy = dairy?.filter(post => member?.role !== 'admin' ? post?.postPrivacy === '127758' : post?.postPrivacy !== '' );
+
   return (
     <>
       <article>
@@ -13,10 +14,10 @@ const Dairy = () => {
           <h2>Dairy Posts:</h2>
           <br />
           {
-            dairy?.length > 0 &&  <ShowPosts data={user?.user?.email?.includes("ashik.") ? dairy : publicDairy} />
+            dairy?.length > 0 &&  <ShowPosts data={showDairy} />
              
           }
-          {publicDairy?.length === 0 && <h3>There are no Dairy!</h3>}
+          {dairy?.length === 0 && <h3>There are no Dairy!</h3>}
           
         </section>
       </article>

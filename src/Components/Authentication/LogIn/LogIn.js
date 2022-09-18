@@ -13,9 +13,25 @@ const LogIn = () => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
       // // The signed-in user info.
-      setUser(result.user);
+      user.setUser(result.user);
+      console.log(result.user);
       if(result.user){
-        navigate('/home')
+        const member = {};
+        member.name = result.user.displayName;
+        member.email = result.user.email;
+        member.photo = result.user.photoURL;
+        member.role = result.user.email === 'ashik.free999@gmail.com' || result.user.email === 'ashik.none999@gmail.com' ? 'admin':'viewer'
+        const options = {
+          method: "POST",
+          headers : {
+            'Accept' : "application/json",
+            'Content-Type' : "application/json"
+          },
+          body : JSON.stringify(member)
+        }
+        fetch(`https://radiant-refuge-40674.herokuapp.com/member`, options)
+        .then(res => console.log(res.status))
+        navigate('/')
       }
       // ...
     }).catch((error) => {

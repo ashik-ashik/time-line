@@ -3,8 +3,9 @@ import useData from '../../hooks/useData/UseData';
 import ShowPosts from '../ShowPosts/ShowPosts';
 
 const TimeLine = () => {
-  const {data} = useData();
-  const timeline = data?.filter(post => post.postType.toLowerCase() === 'timeline');
+  const {data, user, member} = useData();
+  const timeline = data?.filter(post => post.postType.toLowerCase() === 'timeline' );
+  // const showTimeline = timeline?.filter(post => member?.role !== "admin" ? post?.postPrivacy === "127758" : post?.postPrivacy !== '');
   console.log(timeline);
   return (
     <>

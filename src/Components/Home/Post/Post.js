@@ -16,24 +16,24 @@ const Post = () => {
     setPost(data)
   };
   
-  // useEffect(()=>{
-    //   fetch(`https://radiant-refuge-40674.herokuapp.com/post`, {
-  //     method: "POST",
-  //     headers : {
-  //       'Accept' : "application/json",
-  //       'Content-Type' : "application/json"
-  //     },
-  //     body : JSON.stringify(post)
-  //   })
-  //   .then(res => {
-  //     if(res.status === 200){
-  //       setNewPost(1);
-  //       reset();
-  //       window.location.reload();
-  //     }
-  //   });
+  useEffect(()=>{
+      fetch(`https://radiant-refuge-40674.herokuapp.com/post`, {
+      method: "POST",
+      headers : {
+        'Accept' : "application/json",
+        'Content-Type' : "application/json"
+      },
+      body : JSON.stringify(post)
+    })
+    .then(res => {
+      if(res.status === 200){
+        setNewPost(1);
+        reset();
+        window.location.reload();
+      }
+    });
     
-  // },[post]);
+  },[post]);
 
   const contentWrite = event => {
     if(event.keyCode === 13){

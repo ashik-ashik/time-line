@@ -6,16 +6,15 @@ import { Link } from 'react-router-dom';
 import ShowPosts from '../ShowPosts/ShowPosts';
 
 const Home = () => {
-  const {data, user} = useData();
-  const publicPosts = data?.filter(post => post?.postPrivacy === '127758');
-  console.log(user?.user?.email);
+  const {data, user, member} = useData();
+  const publicPosts = data?.filter(post => member?.role === 'admin' ? post?.postPrivacy !== '' : post?.postPrivacy === '127758');
 
   return (
     <>
       <article>
         <section className="container">
           {
-            user?.user && <Post />
+            member?.role === "admin" && <Post />
           }
 
           {
