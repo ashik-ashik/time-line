@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import useData from '../../../hooks/useData/UseData';
 import "../../../Styles/Common/header.scss"
 
 const Header = () => {
+  const {user} = useData();
   return (
     <header>
       <div className="header-container">
@@ -19,6 +21,11 @@ const Header = () => {
             </li>
             <li>
               <Link className='link' to='/dairy'>Dairy</Link>
+            </li>
+            <li>
+              {
+                user?.user === null ? <Link to="/login" >&#128119;</Link> : <button onClick={()=> user?.logout()}>&#128683;</button>
+              }
             </li>
           </ul>
         </div>

@@ -5,7 +5,7 @@ import ShowPosts from '../ShowPosts/ShowPosts';
 const TimeLine = () => {
   const {data, user, member} = useData();
   const timeline = data?.filter(post => post.postType.toLowerCase() === 'timeline' );
-  // const showTimeline = timeline?.filter(post => member?.role !== "admin" ? post?.postPrivacy === "127758" : post?.postPrivacy !== '');
+  const showTimeline = timeline?.filter(post => member?.role !== "admin" ? post?.postPrivacy === "127758" : post?.postPrivacy !== '');
   console.log(timeline);
   return (
     <>
@@ -14,7 +14,7 @@ const TimeLine = () => {
           <h2>Time Line Posts:</h2>
           <br />
           {
-            timeline?.length > 0 ? <ShowPosts data={timeline} />
+            timeline?.length > 0 ? <ShowPosts data={showTimeline} />
               :
             <h3>There is no timeline posts!</h3>
           }

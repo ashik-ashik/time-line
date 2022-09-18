@@ -28,9 +28,9 @@ const EditPost = () => {
         window.alert("The post has been updated successfully");
         window.location.replace("/");
       }
-      console.log(result.modifiedCount)
+      // console.log(result.modifiedCount);
     })
-    console.log(data);
+    // console.log(data);
   }
 
   const contentWrite = event => {
