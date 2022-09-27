@@ -10,6 +10,7 @@ import firebaseInit from "./firebase/firebase.init/firebase.init";
 import LogIn from "./Components/Authentication/LogIn/LogIn";
 import TaggedPosts from "./Components/TaggedPost/TaggedPosts";
 import EditPost from "./Components/EditPost/EditPost";
+import SingleOne from "./Components/SingleOne/SingleOne";
 
   firebaseInit();
   
@@ -25,6 +26,7 @@ function App() {
           <Route path="/dairy" element={<Dairy />} />
           <Route path="/tags/:tagName" element={<TaggedPosts />} />
           <Route path="/edit/:postId" element={<EditPost />} />
+          <Route path="/timeline/:id" element={<SingleOne />} />
           <Route path="/login" element={<LogIn />} />
         </Routes>
         <Footer />

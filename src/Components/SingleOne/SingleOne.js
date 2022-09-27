@@ -1,12 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import  '../../Styles/PostDesign/PostDesign.scss';
 
-const ShowPosts = ({data}) => {
-
+const SingleOne = () => {
   const {user} = useData();
-  const userPhoto = user?.user?.photoURL;
+  const {id} = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(()=>{
+    fetch(`https://radiant-refuge-40674.herokuapp.com/timeline/${id}`)
+    .then(res=>res.json())
+    .then(result => setPost(result))
+  }, []);
+
+  
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
@@ -18,16 +28,14 @@ const ShowPosts = ({data}) => {
         if(result.deletedCount){
           window.location.reload()
         }
-        console.log(result);
       })
     }
   }
-
+  
 
   return (
-    <>
-      {
-            data?.map(post => <div key={post?._id} className="post" >
+    <section className='container'>
+      <div className="post" >
               <hr />
               <div className="post-grid">
                 <div className="user-photo">
@@ -37,8 +45,8 @@ const ShowPosts = ({data}) => {
 
                 <div className="post-details">
                   <div className="post-header">
-                    <h2><Link to={`/timeline/${post?._id}`} >{post?.postTitle}</Link> </h2>
-                    <small> Feelings with &mdash;{String.fromCodePoint(post?.postFeeling)}</small>
+                    <h2>{post?.postTitle}</h2>
+                    {/* <small> Feelings with &mdash;{String.fromCodePoint(post?.postFeeling)}</small> */}
                     {
                       user?.user?.email === post?.authorEmail && <div className="action-option" >
                       <div className='option'>
@@ -57,7 +65,7 @@ const ShowPosts = ({data}) => {
                   </div>
                   <div className='date-privacy'>
                     <span>{post?.postDate}</span>
-                    <span>{String.fromCodePoint(post?.postPrivacy)}</span>
+                    {/* <span>{String.fromCodePoint(post?.postPrivacy)}</span> */}
                     <span style={{marginRight:'8px', display:"inline-block"}}>{post?.postType === "Dairy" ? <>&#128215;</> : <>&#128221;</>}</span>
                     </div>
                   
@@ -77,10 +85,9 @@ const ShowPosts = ({data}) => {
                 </div>
                 
               </div>
-            </div>)
-          }
-    </>
+            </div>
+    </section>
   );
 };
 
-export default ShowPosts;
+export default SingleOne;
