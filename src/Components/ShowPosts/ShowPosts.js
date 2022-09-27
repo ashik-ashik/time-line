@@ -23,6 +23,11 @@ const ShowPosts = ({data}) => {
     }
   }
 
+  if(!data){
+    return <div className="container">
+      <h3>Loading...</h3>
+    </div>
+  }
 
   return (
     <>
@@ -46,6 +51,7 @@ const ShowPosts = ({data}) => {
                         <span></span>
                         <span></span>
                         <div className="option-container">
+                          <h3>Options</h3>
                           <ul>
                             <li><Link to={`/edit/${post?._id}`}>Edit</Link></li>
                             <li onClick={()=>deletePost(post?._id)}>Delete</li>

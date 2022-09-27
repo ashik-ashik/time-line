@@ -24,7 +24,7 @@ const useFirebase = () => {
           setUser(user)
           const uid = user.uid;
         } else {
-          setUser(null)
+          setUser([])
         }
         // setLoading(false)
       });
@@ -34,7 +34,7 @@ const useFirebase = () => {
     // log out user
     const logout = () => {
       signOut(auth).then(() => {
-        setUser(null)
+        setUser([])
       }).catch((error) => {
         console.log(error.message);
       });

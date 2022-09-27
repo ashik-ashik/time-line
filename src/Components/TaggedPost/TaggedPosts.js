@@ -8,6 +8,11 @@ const TaggedPosts = () => {
   const {tagName} = useParams();
   const findTagged = data?.filter(post => post?.postTag === tagName)
 
+  if(!data){
+    return <div className="container">
+      <h3>Loading...</h3>
+    </div>
+  }
   return (
     <article>
       <section className="container">

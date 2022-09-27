@@ -6,7 +6,7 @@ import useData from '../../hooks/useData/UseData';
 import  '../../Styles/PostDesign/PostDesign.scss';
 
 const SingleOne = () => {
-  const {user} = useData();
+  const {user, member} = useData();
   const {id} = useParams();
   const [post, setPost] = useState(null);
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ const SingleOne = () => {
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/timeline/${id}`)
     .then(res=>res.json())
-    .then(result => setPost(result))
-  }, []);
+    .then(result => setPost(result || []));
+  }, [id]);
 
   
   const deletePost = id => {
@@ -32,9 +32,18 @@ const SingleOne = () => {
       })
     }
   }
-  
-  if(post?.postPrivacy === '127758'){
-    navigate('/no')
+ 
+
+  if(!post){
+    return <div className="container">
+      <h3>Loading...</h3>
+    </div>
+  }
+
+  if(member?.role !== 'admin'){
+    if (post?.postPrivacy !== '127758'){
+      navigate('/no');
+    }
   }
 
   return (

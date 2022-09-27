@@ -13,17 +13,16 @@ const DataProvider = ({children}) => {
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/posts`)
     .then(res => res.json())
-    .then(result => setData(result))
+    .then(result => setData(result || []));
   }, [addedNewPost]);
 
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/member/${user?.user?.email}`)
     .then(res => res.json())
-    .then(result => setMember(result))
+    .then(result => setMember(result || []));
   },[user?.user]);
 
   
-
   const allData = {
     data,
     setNewPost, 

@@ -13,8 +13,7 @@ const LogIn = () => {
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
       // // The signed-in user info.
-      user.setUser(result.user);
-      console.log(result.user);
+      user.setUser(result.user || []);
       if(result.user){
         const member = {};
         member.name = result.user.displayName;

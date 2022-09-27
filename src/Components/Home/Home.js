@@ -9,6 +9,11 @@ const Home = () => {
   const {data, user, member} = useData();
   const publicPosts = data?.filter(post => member?.role === 'admin' ? post?.postPrivacy !== '' : post?.postPrivacy === '127758');
 
+  if(!data || !member || !user){
+    return <div className="container">
+      <h3>Loading...</h3>
+    </div>
+  }
   return (
     <>
       <article>
