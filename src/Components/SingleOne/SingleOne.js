@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import  '../../Styles/PostDesign/PostDesign.scss';
 
@@ -9,6 +9,7 @@ const SingleOne = () => {
   const {user} = useData();
   const {id} = useParams();
   const [post, setPost] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/timeline/${id}`)
@@ -32,6 +33,9 @@ const SingleOne = () => {
     }
   }
   
+  if(post?.postPrivacy === '127758'){
+    navigate('/no')
+  }
 
   return (
     <section className='container'>
@@ -46,7 +50,7 @@ const SingleOne = () => {
                 <div className="post-details">
                   <div className="post-header">
                     <h2>{post?.postTitle}</h2>
-                    {/* <small> Feelings with &mdash;{String.fromCodePoint(post?.postFeeling)}</small> */}
+                    {/* <small> Feelings with &mdash; {String.fromCodePoint(post?.postFeeling)}</small> */}
                     {
                       user?.user?.email === post?.authorEmail && <div className="action-option" >
                       <div className='option'>

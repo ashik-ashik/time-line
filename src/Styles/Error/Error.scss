@@ -1,0 +1,29 @@
+.error{
+  padding-top: 100px;
+  .errAnimation{
+    text-align: center;
+    span{
+      display: inline-block;
+      font-size: 6em;
+      font-weight: 900;
+      color: #360404;
+      animation: textA 1s ease-in-out infinite forwards alternate;
+    }
+    span:nth-child(2){
+      animation-delay: .5s;
+    }
+    @keyframes textA {
+      0%{
+        transform: translateY(-10px);
+      }
+      100%{
+        transform: translateY(10px);
+      }
+    }
+  }
+
+  h2{
+    text-align: center;
+    color: darkred;
+  }
+}
