@@ -47,7 +47,7 @@ const LogIn = () => {
         </div>
         <div className="login-action">
           {
-            !user?.user ? <button className='google-login' onClick={login}>Login With Google</button>
+            user?.user?.length === 0 ? <button className='google-login' onClick={login}>Login With Google</button>
              : 
             <h2>You are logged in.</h2>
           }

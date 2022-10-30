@@ -24,7 +24,7 @@ const Header = () => {
             </li>
             <li>
               {
-                user?.user === null ? <Link to="/login" >&#128119;</Link> : <button onClick={()=> user?.logout()}>&#128683;</button>
+                user?.user?.length === 0 ? <Link to="/login" >&#128119;</Link> : <button onClick={()=> user?.logout()}>&#128683;</button>
               }
             </li>
           </ul>
