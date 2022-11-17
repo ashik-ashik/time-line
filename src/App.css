@@ -6,5 +6,7 @@
   font-family: 'Chakra Petch', sans-serif;
 }
 body{
-  background: #221f3d;
+  background: url(https://i.postimg.cc/htn7mBQ1/bg.jpg) center center;
+  background-size: cover;
+  background-attachment: fixed;
 }

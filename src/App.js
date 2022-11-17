@@ -13,6 +13,8 @@ import EditPost from "./Components/EditPost/EditPost";
 import SingleOne from "./Components/SingleOne/SingleOne";
 import Error from "./Components/Error/Error";
 import Addnew from "./Components/Addnew/Addnew";
+import About from "./Components/About/About";
+import Modal from "./Components/Common/Modal/Modal";
 
   firebaseInit();
   
@@ -22,6 +24,7 @@ function App() {
     <DataProvider>
       <BrowserRouter>
         <Header />
+        <Modal />
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/addnew" element={<Addnew />} />
@@ -31,6 +34,7 @@ function App() {
           <Route path="/edit/:postId" element={<EditPost />} />
           <Route path="/timeline/:id" element={<SingleOne />} />
           <Route path="/no" element={<Error />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<LogIn />} />
         </Routes>
         <Footer />

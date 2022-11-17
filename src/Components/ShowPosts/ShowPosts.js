@@ -93,8 +93,8 @@ const ShowPosts = ({data, maxCon}) => {
                   {/* count post contant words and paragraphs */}
                   <p className="content-count">
                     <span>Para: {post?.postContent?.length}</span> 
-                    <span> Word: {post?.postContent?.join(' ')?.split(' ')?.length}</span>
-                    <span> Character: {post?.postContent?.join(' ')?.split('')?.length}</span>
+                    <span>Word: {post?.postContent?.join(' ')?.split(' ')?.length}</span>
+                    <span>Character: {post?.postContent?.join(' ')?.split('')?.length}</span>
                   </p>
                 </div>
 
