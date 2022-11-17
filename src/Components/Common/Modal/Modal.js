@@ -17,7 +17,7 @@ const Modal = () => {
     setShow(vl)
   }
   console.log(isShow);
-  if(isShow){
+  if(isShow === 'true'){
     return (
       <div className='modal-body'>
         <button onClick={()=>maintainModal(false)}>Close</button>

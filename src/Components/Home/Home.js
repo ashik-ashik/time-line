@@ -19,6 +19,21 @@ const Home = () => {
     <>
       <article>
         <section className="container">
+          {
+            <>
+              <ul className='mini-menu'>
+                <li>
+                  <Link to='/mybooks'>My Books</Link>
+                </li>
+                <li>
+                  <Link to='/todo'>ToDo</Link>
+                </li>
+                <li>
+                  <Link to='/strategy'>Strategy</Link>
+                </li>
+              </ul>
+            </>
+          }
 
           {
             data?.length > 0 ? <ShowPosts maxCon={'...'} data={user?.user?.email !== 'ashik.free999@gmail.com' ? publicPosts : data} /> 

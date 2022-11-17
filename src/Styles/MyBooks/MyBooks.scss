@@ -1,0 +1,101 @@
+.mybooks-selfs{
+  width: 100%;
+  overflow-x: auto;
+  .mybooks-table{
+    border: 1px solid #333;
+    border-collapse: collapse;
+    th, td{
+      white-space: nowrap;
+      padding: 4px 10px;
+      border: 1px solid #000;
+      word-break: keep-all;
+      text-transform: capitalize;
+    }
+    tr button,
+    tr a.edit{
+      text-decoration: none;
+      outline: none;
+      border: none;
+      padding: 5px 7px;
+      font-size: 13px;
+      color: #eee;
+      display: inline-block;
+    }
+    tr a.edit{
+      background: #03849b;
+    }
+    tr button.del{
+      background: #c40c0c;
+      margin-left: 5px;
+    }
+  }
+}
+.add-new-book{
+  padding: 7px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  background: #000;
+  color: #eee;
+  margin-top: 10px;
+}
+.mybooks-selfs::-webkit-scrollbar{
+  height: 8px;
+  margin-top: 6px;
+}
+.mybooks-selfs::-webkit-scrollbar-track{
+  height: 7px;
+  background: #168500;
+}
+.mybooks-selfs::-webkit-scrollbar-thumb{
+  background: #f82e0b;
+  border-radius: 5px;
+}
+
+
+// add book and edit book form design
+
+form {
+  .input-field{
+    width: 100%;
+    margin-bottom: 10px;
+    span{
+      font-size: 13px;
+      font-weight: 600;
+    }
+    input, select{
+      width: 100%;
+      padding: 5px 10px;
+      outline: none;
+    }
+  }
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
+  .add-book-btn{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    button{
+      border: none;
+      outline: none;
+      background: #000;
+      color: #eee;
+      padding: 10px 30px;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    button:hover{
+      background: #222;
+    }
+  }
+}

@@ -33,11 +33,13 @@ const ShowPosts = ({data, maxCon}) => {
   return (
     <>
       {
-            data?.map(post => <div key={post?._id} className="post" >
-              <hr />
-              <div className="post-grid">
+            data?.map((post, i) => <div key={post?._id} className="post" >
+              {i !== 0 && <hr />}
+              <div className="post-grid" style={{marginTop:i===0 ? '20px' : '0'}}>
                 <div className="user-photo">
-                  <img src="https://i.postimg.cc/4ND07BXk/mtl.png" alt="" />
+                  <Link to='/about'>
+                    <img src="https://i.postimg.cc/4ND07BXk/mtl.png" alt="" />
+                  </Link>
                   {/* <img src={userPhoto} alt="" /> */}
                 </div>
 
