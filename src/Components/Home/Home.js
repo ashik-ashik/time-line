@@ -8,6 +8,7 @@ import ShowPosts from '../ShowPosts/ShowPosts';
 const Home = () => {
   const {data, user, member} = useData();
   const publicPosts = data?.filter(post => member?.role === 'admin' ? post?.postPrivacy !== '' : post?.postPrivacy === '127758');
+  // const publicPosts = data?.filter(post =>  post?.postPrivacy !== '');
 
   if(!data || !member){
     return <div className="container">
@@ -18,12 +19,9 @@ const Home = () => {
     <>
       <article>
         <section className="container">
-          {
-            member?.role === "admin" && <Post />
-          }
 
           {
-            data?.length > 0 ? <ShowPosts data={user?.user?.email !== 'ashik.free999@gmail.com' ? publicPosts : data} /> 
+            data?.length > 0 ? <ShowPosts maxCon={'...'} data={user?.user?.email !== 'ashik.free999@gmail.com' ? publicPosts : data} /> 
               :
             <h3>There are no post available!</h3>
           }         

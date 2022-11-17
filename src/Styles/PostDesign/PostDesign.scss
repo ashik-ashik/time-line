@@ -39,6 +39,7 @@
           }
         }
         .action-option{
+          min-width: 70px;
           align-self: flex-end;
           margin-left: auto;
           .option{
@@ -144,6 +145,28 @@
         a{
           text-decoration: none;
           font-weight: 600;
+          color: darkgreen;
+        }
+      }
+      .content-count{
+        font-size: 11px;
+        color: #666;
+        padding: 4px;
+        margin-top: 10px;
+        border-top: 1px solid #8b8b8d;
+        border-bottom: 1px solid #8b8b8d;
+        font-weight: 600;
+      }
+      .read-more{
+        a{
+          text-decoration: none;
+          font-weight: 800;
+          color: #bd2543;
+        }
+        a:hover{
+          color: blueviolet;
+        }
+        a:visited{
           color: darkgreen;
         }
       }

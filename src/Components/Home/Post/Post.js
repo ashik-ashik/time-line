@@ -5,6 +5,9 @@ import useData from '../../../hooks/useData/UseData';
 
 const Post = () => {
   const {setNewPost, user} = useData();
+  const [countWords, setWords] = useState(0);
+  const [countCharac, setCharac] = useState(0);
+  const [countPara, setPara] = useState(0);
 
   const [post, setPost] = useState(null);
   const { register, handleSubmit, reset } = useForm();
@@ -29,20 +32,22 @@ const Post = () => {
       if(res.status === 200){
         setNewPost(1);
         reset();
-        window.location.reload();
+        window.location.replace('/');
       }
     });
     
-  },[post]);
+  },[post, reset, setNewPost]);
 
-  const contentWrite = event => {
-    if(event.keyCode === 13){
-      event.target.value = event.target.value + '\n';
-    }
-    // console.log(event.target.value);
+  // count post content
+  const contentCount = e => {
+    setWords(e?.target?.value?.split(" ")?.length);
+    setCharac(e?.target?.value?.split("")?.length);
+    setPara(e?.target?.value?.split("\n")?.length);
   }
 
-  console.log(post)
+
+
+  // console.log(post)
   return (
     <>
       <div className="post-form" id='post-form'>
@@ -50,7 +55,12 @@ const Post = () => {
         
         <form onSubmit={handleSubmit(postNow)}>
           <input {...register('postTitle')} className='post-title' type="text" name="postTitle" placeholder="Post Title &#128221;" />
-          <textarea onKeyUp={contentWrite} {...register('postContent', {required: true})} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
+          <p className="content-count">
+            <span>Para: {countPara}</span>
+            <span> Words: {countWords}</span>
+            <span> Charac: {countCharac}</span>
+          </p>
+          <textarea onKeyUp={contentCount} {...register('postContent', {required: true})} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
           <div className="form-grid">
             <select name="postType" {...register("postType")}>
               <option value="Timeline">&#128221; Time Line</option>

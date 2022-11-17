@@ -12,6 +12,7 @@ import TaggedPosts from "./Components/TaggedPost/TaggedPosts";
 import EditPost from "./Components/EditPost/EditPost";
 import SingleOne from "./Components/SingleOne/SingleOne";
 import Error from "./Components/Error/Error";
+import Addnew from "./Components/Addnew/Addnew";
 
   firebaseInit();
   
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/addnew" element={<Addnew />} />
           <Route path="/timeline" element={<TimeLine />} />
           <Route path="/dairy" element={<Dairy />} />
           <Route path="/tags/:tagName" element={<TaggedPosts />} />

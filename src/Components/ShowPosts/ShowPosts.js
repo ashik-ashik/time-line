@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import  '../../Styles/PostDesign/PostDesign.scss';
 
-const ShowPosts = ({data}) => {
+const ShowPosts = ({data, maxCon}) => {
 
-  const {user} = useData();
+  const {user, member} = useData();
   const userPhoto = user?.user?.photoURL;
+
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
@@ -65,11 +66,20 @@ const ShowPosts = ({data}) => {
                     <span>{post?.postDate}</span>
                     <span>{String.fromCodePoint(post?.postPrivacy)}</span>
                     <span style={{marginRight:'8px', display:"inline-block"}}>{post?.postType === "Dairy" ? <>&#128215;</> : <>&#128221;</>}</span>
-                    </div>
+                  </div>
                   
                   <div className="post-content">
                     {
-                      post?.postContent?.map((line, i) => line !== '' && <p key={i}>{line}</p> )
+                      post?.postContent?.map((line, i) => {
+                        if(maxCon && i <= 2){
+                          return (<>
+                          {line !== '' && <p key={i}>{line} <sub>{i +1}</sub></p>} {i===2 && <p className='read-more'><Link to={`/timeline/${post?._id}`} >Read More</Link></p>}
+                          </>)
+                        }else if(!maxCon){
+                          return line !== '' && <p key={i}>{line} <sub>{i +1}</sub></p>
+                        }
+                         
+                    })
                     }
                     {
                       post?.postImg && <img src={post?.postImg} alt="postImage" />
@@ -78,9 +88,17 @@ const ShowPosts = ({data}) => {
                   </div>
                   <div className='tags'>{post?.postTag && <Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link>}</div>
                   <div className="admin">
-                    <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{post?.postAuthor}</a></span>
+                    <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{ member?.role !== "admin" ? post?.postAuthor : 'Admin'}</a></span>
                   </div>
+                  {/* count post contant words and paragraphs */}
+                  <p className="content-count">
+                    <span>Para: {post?.postContent?.length}</span> 
+                    <span> Word: {post?.postContent?.join(' ')?.split(' ')?.length}</span>
+                    <span> Character: {post?.postContent?.join(' ')?.split('')?.length}</span>
+                  </p>
                 </div>
+
+                
                 
               </div>
             </div>)

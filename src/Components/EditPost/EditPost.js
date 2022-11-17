@@ -33,14 +33,6 @@ const EditPost = () => {
     // console.log(data);
   }
 
-  const contentWrite = event => {
-    if(event.keyCode === 13){
-      event.target.value = event.target.value + '\n';
-    }
-    // console.log(event.target.value);
-  }
-
-  console.log(postId);
 
   if(!data){
     return <div className="container"><h4>Loading....</h4></div>
@@ -52,7 +44,10 @@ const EditPost = () => {
         <h3>Edit post:</h3>
         <form onSubmit={handleSubmit(updateNow)}>
           <input {...register('postTitle')} defaultValue={currentPost[0]?.postTitle} className='post-title' type="text" name="postTitle" placeholder="Post Title &#128221;" />
-          <textarea onKeyUp={contentWrite} {...register('postContent', {required: true})} defaultValue={currentPost[0]?.postContent} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
+          <div id="post-content">
+          <textarea  {...register('postContent', {required: true})} defaultValue={currentPost[0]?.postContent?.join('\n')} className="post-content" name="postContent" cols="30" rows="10" placeholder='Write Your Story...'></textarea>
+
+          </div>
           <div className="form-grid">
             <select name="postType" {...register("postType")}>
               <option selected={currentPost[0]?.postType === 'Timeline' && true}  value="Timeline">&#128221; Time Line</option>
