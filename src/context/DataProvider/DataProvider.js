@@ -22,12 +22,38 @@ const DataProvider = ({children}) => {
     .then(result => setMember(result || []));
   },[user?.user]);
 
+  // load books
+  const [books, setBooks] = useState(null)
+  useEffect(()=>{
+    fetch(`https://radiant-refuge-40674.herokuapp.com/books`)
+    .then(res=>res.json())
+    .then(data => setBooks(data || []))
+  },[]);
+  // delete book
+    // delete a books
+    const deleteBook = id => {
+      const sureDel = window.confirm("Are you Sure to delete the Book");
+      if(sureDel){
+        fetch(`https://radiant-refuge-40674.herokuapp.com/book/${id}`,{
+          method: "DELETE"
+        })
+        .then(res=>res.json())
+        .then(result => {
+          if(result.deletedCount){
+            window.location.reload()
+          }
+        })
+      }
+    }
+
   
   const allData = {
     data,
     setNewPost, 
     user,
     member,
+    books,
+    deleteBook
   }
 
   return (

@@ -55,8 +55,10 @@ const AddBook = () => {
               <span>Book Collection By:</span>
               <select {...register('collectionMt')}>
                 <option value="buy">Brougth</option>
+                <option value="gifted">Gifted</option>
                 <option value="borrowed">Borrowed</option>
                 <option value="boibrikkho">Boibrikkho</option>
+                <option value="tobuy">To Buy</option>
               </select>
             </div>
 
@@ -67,6 +69,36 @@ const AddBook = () => {
                 <option value="read">Read</option>
                 <option value="reading">Reading</option>
                 <option value="unread">Unread</option>
+              </select>
+            </div>
+          </div>
+
+          {/* categories and filter key */}
+          <div className="input-field grid">
+
+            {/* book Categories */}
+            <div>
+              <span>Book Categories:</span>
+              <select {...register('type')}>
+                <option value="উপন্যাস">উপন্যাস</option>
+                <option value="থ্রিলার">থ্রিলার</option>
+                <option value="আত্ম-উন্নয়োন">আত্ম উন্নয়োনমূলক</option>
+                <option value="প্রবন্ধ">প্রবন্ধ</option>
+                <option value="নাটক">নাটক</option>
+                <option value="ব্যবসা-আর্থিক">ব্যবসায় ও আর্থিক</option>
+                <option value="কবিতা">কবিতা</option>
+              </select>
+            </div>
+
+            {/* book filter */}
+            <div>
+              <span>Filter key:</span>
+              <select {...register('key')}>
+                <option value="read">Read</option>
+                <option value="toread">To Read</option>
+                <option value="tobuy">To Buy</option>
+                <option value="boibrikkho">Boibrikkho</option>
+                <option value="gifted">Gifted</option>
               </select>
             </div>
           </div>

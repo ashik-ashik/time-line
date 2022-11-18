@@ -18,6 +18,13 @@ import Modal from "./Components/Common/Modal/Modal";
 import MyBooks from "./Components/MyBooks/MyBooks";
 import AddBook from "./Components/MyBooks/AddBook";
 import EditBook from "./Components/MyBooks/EditBook";
+import MySelf from "./Components/MyBooks/Filters/MySelf";
+import ReadBook from "./Components/MyBooks/Filters/ReadBook";
+import ToRead from "./Components/MyBooks/Filters/ToRead";
+import ToBuy from "./Components/MyBooks/Filters/ToBuy";
+import BoiBrikkho from "./Components/MyBooks/Filters/BoiBrikkho";
+import Gifted from "./Components/MyBooks/Filters/Gifted";
+import AllBooks from "./Components/MyBooks/Filters/AllBooks";
 
   firebaseInit();
   
@@ -33,7 +40,15 @@ function App() {
           <Route path="/addnew" element={<Addnew />} />
           <Route path="/timeline" element={<TimeLine />} />
           <Route path="/dairy" element={<Dairy />} />
-          <Route path="/mybooks" element={<MyBooks />} />
+          <Route path="/mybooks" element={<MyBooks />}>
+            <Route path="" element={<AllBooks />} />
+            <Route path="myself" element={<MySelf />} />
+            <Route path="read" element={<ReadBook />} />
+            <Route path="toread" element={<ToRead />} />
+            <Route path="tobuy" element={<ToBuy />} />
+            <Route path="boibrikkho" element={<BoiBrikkho />} />
+            <Route path="gifted" element={<Gifted />} />
+          </Route>
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/editbook/:id" element={<EditBook />} />
           <Route path="/tags/:tagName" element={<TaggedPosts />} />

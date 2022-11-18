@@ -1,6 +1,40 @@
 .mybooks-selfs{
   width: 100%;
   overflow-x: auto;
+  // book menu
+  .book-menu{
+    background: #0000009c;
+    margin-bottom: 15px;
+    ul{
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      li{
+        margin: 0;
+        a{
+          background: transparent;
+          border: none;
+          outline: none;
+          display: inline-block;
+          // margin-right: 5px;
+          padding: 5px 6px;
+          cursor: pointer;
+          transition: all 200ms;
+          color: #fff;
+          text-decoration: none;
+          font-size: 12px;
+        }
+        a.active{
+          background: #222;
+        }
+        a:hover{
+          background: #222;
+        }
+      }
+    }
+  }
+
+  // table
   .mybooks-table{
     border: 1px solid #333;
     border-collapse: collapse;
@@ -10,6 +44,7 @@
       border: 1px solid #000;
       word-break: keep-all;
       text-transform: capitalize;
+      font-size: 14px;
     }
     tr button,
     tr a.edit{

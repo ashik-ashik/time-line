@@ -22,6 +22,8 @@ const EditBook = () => {
   setValue("borrowedAt", book?.borrowedAt);
   setValue("isreturned", book?.isreturned);
   setValue("returnedAt", book?.returnedAt);
+  setValue("type", book?.type);
+  setValue("key", book?.key);
 
   const {id} = useParams();
 
@@ -86,8 +88,10 @@ const EditBook = () => {
               <span>Book Collection By:</span>
               <select {...register('collectionMt')}>
                 <option value="buy">Brougth</option>
+                <option value="gifted">Gifted</option>
                 <option value="borrowed">Borrowed</option>
                 <option value="boibrikkho">Boibrikkho</option>
+                <option value="tobuy">To Buy</option>
               </select>
             </div>
           {/* book reading status field */}
@@ -97,6 +101,36 @@ const EditBook = () => {
                 <option value="read">Read</option>
                 <option value="reading">Reading</option>
                 <option value="unread">Unread</option>
+              </select>
+            </div>
+          </div>
+
+          {/* categories and filter key */}
+          <div className="input-field grid">
+
+            {/* book Categories */}
+            <div>
+              <span>Book type:</span>
+              <select {...register('type')}>
+                <option value="উপন্যাস">উপন্যাস</option>
+                <option value="থ্রিলার">থ্রিলার</option>
+                <option value="আত্ম-উন্নয়োন">আত্ম উন্নয়োনমূলক</option>
+                <option value="প্রবন্ধ">প্রবন্ধ</option>
+                <option value="নাটক">নাটক</option>
+                <option value="ব্যবসা-আর্থিক">ব্যবসায় ও আর্থিক</option>
+                <option value="কবিতা">কবিতা</option>
+              </select>
+            </div>
+
+            {/* book filter */}
+            <div>
+              <span>Filter key:</span>
+              <select {...register('key')}>
+                <option value="read">Read</option>
+                <option value="toread">To Read</option>
+                <option value="tobuy">To Buy</option>
+                <option value="boibrikkho">Boibrikkho</option>
+                <option value="gifted">Gifted</option>
               </select>
             </div>
           </div>
@@ -155,7 +189,7 @@ const EditBook = () => {
 
           {/* submit button */}
           <div className="add-book-btn">
-            <button type="submit">add book</button>
+            <button type="submit">update book</button>
           </div>
         </form>
       </section>

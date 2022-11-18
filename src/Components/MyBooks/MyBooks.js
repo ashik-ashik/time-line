@@ -1,45 +1,52 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import useData from '../../hooks/useData/UseData';
 import "../../Styles/MyBooks/MyBooks.scss"
+import Showbooks from './ShowBooks/ShowBooks';
 
 const MyBooks = () => {
-  const [books, setBooks] = useState(null)
-  useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/books`)
-    .then(res=>res.json())
-    .then(data => setBooks(data || []))
-  },[]);
-  // console.log(books);
+  const {books, deleteBook} = useData();
 
-  // delete a books
-  const deleteBook = id => {
-    const sureDel = window.confirm("Are you Sure to delete the Book");
-    if(sureDel){
-      fetch(`https://radiant-refuge-40674.herokuapp.com/book/${id}`,{
-        method: "DELETE"
-      })
-      .then(res=>res.json())
-      .then(result => {
-        if(result.deletedCount){
-          window.location.reload()
-        }
-      })
-    }
-  }
+
+
+  
   
   return (
     <article>
       <section className="container">
         <div className="mybooks-selfs">
           <h1>My Book List:</h1><br />
+          <div className="book-menu">
+            <ul>
+              <li>
+                <NavLink to='myself'>MySelf</NavLink>
+              </li>
+              <li>
+                <NavLink to='read'>Read</NavLink>
+              </li>
+              <li>
+                <NavLink to='toread'>To Read</NavLink>
+              </li>
+              <li>
+                <NavLink to='tobuy'>To Buy</NavLink>
+              </li>
+              <li>
+                <NavLink to='gifted'>Gifted</NavLink>
+              </li>
+              <li>
+                <NavLink to='boibrikkho'>BoiBrikkho</NavLink>
+              </li>
+            </ul>
+          </div>
           <table className="mybooks-table">
             <thead>
               <tr>
                 <th>SL</th>
                 <th>Name:</th>
                 <th>Writer:</th>
+                <th>Type:</th>
                 <th>Collection:</th>
                 <th>Reading Status:</th>
                 <th>Borrow Status:</th>
@@ -49,36 +56,19 @@ const MyBooks = () => {
               </tr>
             </thead>
             <tbody>
-              {!books && <h2>Loading...</h2>}
-              {
-                books?.map((book,i)=> <Showbooks deleteBook={deleteBook} book={book} i={i} key={i} />)
-              }
+              {!books && <tr><td style={{fontWeight:'700'}} colSpan={10}>Loading...</td></tr>}
+              <Outlet />
             </tbody>
           </table>
           <p>&nbsp;</p>
         </div>
+        
           <Link to='/addbook' className='add-new-book'>+ Add New Book</Link>
       </section>
     </article>
   );
 };
 
-const Showbooks = ({deleteBook, book,i}) =>{
-  return (<tr>
-            <td>{i+1 <10 ? ('0'+(i+1)) : (i+1)}</td>
-            <td>{book?.bookName}</td>
-            <td>{book?.writerName}</td>
-            <td>{book?.collectionMt}</td>
-            <td>{book?.readingSt}</td>
-            <td>{book?.isBorrowed}</td>
-            <td>{book?.isreturned ==='no' && book?.borrowedTo}</td>
-            <td>{book?.isreturned ==='no' && book?.borrowedAt}</td>
-            <td>
-              <Link to={`/editbook/${book?._id}`} className='edit'>Edit</Link>
-              <button onClick={()=>deleteBook(book?._id)} className='del'>Del</button>
-            </td>
-          </tr>
-          )
-}
+
 
 export default MyBooks;
