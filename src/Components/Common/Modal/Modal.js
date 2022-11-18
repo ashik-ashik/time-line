@@ -16,7 +16,6 @@ const Modal = () => {
     sessionStorage.setItem('isShow', vl);
     setShow(vl)
   }
-  console.log(isShow);
   if(isShow === 'true'){
     return (
       <div className='modal-body'>

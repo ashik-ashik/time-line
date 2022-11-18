@@ -2,11 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Showbooks = ({deleteBook, book,i}) =>{
-  return (<tr>
-            <td>{i+1 <10 ? ('0'+(i+1)) : (i+1)}</td>
+  return (<tr key={i}>
+            <td className={book.favourit === 'yes' ? 'fav' : ''}>{i+1 <10 ? ('0'+(i+1)) : (i+1)}</td>
             <td>{book?.bookName}</td>
             <td>{book?.writerName}</td>
             <td>{book?.type}</td>
+            <td>{book?.story}</td>
+            <td>{book?.page}</td>
+            <td>{book?.price} {book?.price && 'TK.'}</td>
             <td>{book?.collectionMt}</td>
             <td>{book?.readingSt}</td>
             <td>{book?.isBorrowed}</td>

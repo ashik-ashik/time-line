@@ -4,7 +4,7 @@ import Showbooks from '../ShowBooks/ShowBooks';
 
 const ToBuy = () => {
   const {books, deleteBook} = useData();
-  const toBuy = books?.filter(book=> book?.key === 'toBuy');
+  const toBuy = books?.filter(book=> book?.key === 'tobuy');
   return (
     <>
       {

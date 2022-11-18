@@ -4,7 +4,7 @@ import Showbooks from '../ShowBooks/ShowBooks';
 
 const MySelf = () => {
   const {books, deleteBook} = useData();
-  const myself = books?.filter(book=> book?.collectionMt === 'buy' || 'gifted')
+  const myself = books?.filter(book=> book?.collectionMt === 'buy' || book?.collectionMt === 'gifted')
   return (
     <>
       {

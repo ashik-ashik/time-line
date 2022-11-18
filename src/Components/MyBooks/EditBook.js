@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import "../../Styles/MyBooks/MyBooks.scss"
 
 
@@ -24,6 +24,9 @@ const EditBook = () => {
   setValue("returnedAt", book?.returnedAt);
   setValue("type", book?.type);
   setValue("key", book?.key);
+  setValue("key", book?.story);
+  setValue("key", book?.page);
+  setValue("key", book?.price);
 
   const {id} = useParams();
 
@@ -82,6 +85,28 @@ const EditBook = () => {
             </div>
           </div>
 
+          {/* book story field */}
+          <div className="input-field">
+            <div>
+              <span>Story within one word:</span>
+              <input {...register('story')} type="text" placeholder='Main Story' />
+            </div>
+          </div>
+
+          <div className="input-field grid">
+          {/* Number of page */}
+            <div>
+              <span>Number of pages:</span>
+              <input {...register('page')} placeholder='Number of pages' type="number" />
+            </div>
+
+          {/* book price field */}
+            <div>
+              <span>Price of Book:</span>
+              <input {...register('price')} placeholder='Price' type="number" />
+            </div>
+          </div>
+
           {/* book collection method field */}
           <div className="input-field grid">
             <div>
@@ -92,6 +117,7 @@ const EditBook = () => {
                 <option value="borrowed">Borrowed</option>
                 <option value="boibrikkho">Boibrikkho</option>
                 <option value="tobuy">To Buy</option>
+                <option value="digital">Digital</option>
               </select>
             </div>
           {/* book reading status field */}
@@ -119,6 +145,7 @@ const EditBook = () => {
                 <option value="নাটক">নাটক</option>
                 <option value="ব্যবসা-আর্থিক">ব্যবসায় ও আর্থিক</option>
                 <option value="কবিতা">কবিতা</option>
+                <option value="islamic">Islamic</option>
               </select>
             </div>
 
@@ -189,6 +216,7 @@ const EditBook = () => {
 
           {/* submit button */}
           <div className="add-book-btn">
+            <Link to='/mybooks'>cancel</Link>
             <button type="submit">update book</button>
           </div>
         </form>

@@ -1,38 +1,7 @@
 .mybooks-selfs{
   width: 100%;
   overflow-x: auto;
-  // book menu
-  .book-menu{
-    background: #0000009c;
-    margin-bottom: 15px;
-    ul{
-      list-style-type: none;
-      display: flex;
-      margin: 0;
-      li{
-        margin: 0;
-        a{
-          background: transparent;
-          border: none;
-          outline: none;
-          display: inline-block;
-          // margin-right: 5px;
-          padding: 5px 6px;
-          cursor: pointer;
-          transition: all 200ms;
-          color: #fff;
-          text-decoration: none;
-          font-size: 12px;
-        }
-        a.active{
-          background: #222;
-        }
-        a:hover{
-          background: #222;
-        }
-      }
-    }
-  }
+  
 
   // table
   .mybooks-table{
@@ -41,7 +10,7 @@
     th, td{
       white-space: nowrap;
       padding: 4px 10px;
-      border: 1px solid #000;
+      border: 1px solid #444;
       word-break: keep-all;
       text-transform: capitalize;
       font-size: 14px;
@@ -62,6 +31,27 @@
     tr button.del{
       background: #c40c0c;
       margin-left: 5px;
+    }
+    thead tr{
+      background: #3a0379;
+      color: #eee;
+      font-weight: 500;
+    }
+    tbody tr:nth-child(even){
+      background: #027e4a59;
+    }
+
+    .fav{
+      position: relative;
+    }
+    .fav::after{
+      content: '\2606';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      color: #f82e0b69;
     }
   }
 }
@@ -91,6 +81,9 @@
   border-radius: 5px;
 }
 
+// favourit book
+
+
 
 // add book and edit book form design
 
@@ -116,8 +109,8 @@ form {
   .add-book-btn{
     margin-top: 20px;
     display: flex;
-    justify-content: flex-end;
-    button{
+    justify-content: space-between;
+    button,a{
       border: none;
       outline: none;
       background: #000;
@@ -128,9 +121,43 @@ form {
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
+      text-decoration: none;
     }
     button:hover{
       background: #222;
+    }
+  }
+}
+
+// book menu
+.book-menu{
+  background: #0000009c;
+  margin-bottom: 15px;
+  ul{
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    li{
+      margin: 0;
+      a{
+        background: transparent;
+        border: none;
+        outline: none;
+        display: inline-block;
+        // margin-right: 5px;
+        padding: 5px 6px;
+        cursor: pointer;
+        transition: all 200ms;
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+      }
+      a.active{
+        background: #222;
+      }
+      a:hover{
+        background: #222;
+      }
     }
   }
 }

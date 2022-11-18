@@ -16,9 +16,8 @@ const MyBooks = () => {
   return (
     <article>
       <section className="container">
-        <div className="mybooks-selfs">
-          <h1>My Book List:</h1><br />
-          <div className="book-menu">
+        <h1>My Book List:</h1><br />
+        <div className="book-menu">
             <ul>
               <li>
                 <NavLink to='myself'>MySelf</NavLink>
@@ -40,6 +39,7 @@ const MyBooks = () => {
               </li>
             </ul>
           </div>
+        <div className="mybooks-selfs">
           <table className="mybooks-table">
             <thead>
               <tr>
@@ -47,6 +47,9 @@ const MyBooks = () => {
                 <th>Name:</th>
                 <th>Writer:</th>
                 <th>Type:</th>
+                <th>Story:</th>
+                <th>Page:</th>
+                <th>Price:</th>
                 <th>Collection:</th>
                 <th>Reading Status:</th>
                 <th>Borrow Status:</th>
