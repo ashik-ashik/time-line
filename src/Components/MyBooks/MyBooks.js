@@ -1,13 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import "../../Styles/MyBooks/MyBooks.scss"
-import Showbooks from './ShowBooks/ShowBooks';
 
 const MyBooks = () => {
-  const {books, deleteBook} = useData();
+  const {books} = useData();
 
 
 

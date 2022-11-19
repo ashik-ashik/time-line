@@ -25,6 +25,8 @@ import ToBuy from "./Components/MyBooks/Filters/ToBuy";
 import BoiBrikkho from "./Components/MyBooks/Filters/BoiBrikkho";
 import Gifted from "./Components/MyBooks/Filters/Gifted";
 import AllBooks from "./Components/MyBooks/Filters/AllBooks";
+import PrivateRoute from "./Components/Common/PrivateRoute/PrivateRoute";
+import AdminRoute from "./Components/AdminRoute/AdminRoute";
 
   firebaseInit();
   
@@ -37,10 +39,12 @@ function App() {
         <Modal />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/addnew" element={<Addnew />} />
-          <Route path="/timeline" element={<TimeLine />} />
-          <Route path="/dairy" element={<Dairy />} />
-          <Route path="/mybooks" element={<MyBooks />}>
+          <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>} />
+          <Route path="/addnew" element={<AdminRoute><Addnew /></AdminRoute>} />
+          <Route path="/edit/:postId" element={<AdminRoute><EditPost /></AdminRoute>} />
+          <Route path="/timeline" element={<PrivateRoute><TimeLine /></PrivateRoute>} />
+          <Route path="/dairy" element={<PrivateRoute><Dairy /></PrivateRoute>} />
+          <Route path="/mybooks" element={<PrivateRoute><MyBooks /></PrivateRoute>}>
             <Route path="" element={<AllBooks />} />
             <Route path="myself" element={<MySelf />} />
             <Route path="read" element={<ReadBook />} />
@@ -49,11 +53,10 @@ function App() {
             <Route path="boibrikkho" element={<BoiBrikkho />} />
             <Route path="gifted" element={<Gifted />} />
           </Route>
-          <Route path="/addbook" element={<AddBook />} />
-          <Route path="/editbook/:id" element={<EditBook />} />
-          <Route path="/tags/:tagName" element={<TaggedPosts />} />
-          <Route path="/edit/:postId" element={<EditPost />} />
-          <Route path="/timeline/:id" element={<SingleOne />} />
+          <Route path="/addbook" element={<AdminRoute><AddBook /></AdminRoute>} />
+          <Route path="/editbook/:id" element={<AdminRoute><EditBook /></AdminRoute>} />
+          <Route path="/tags/:tagName" element={<PrivateRoute><TaggedPosts /></PrivateRoute>} />
+          <Route path="/timeline/:id" element={<PrivateRoute><SingleOne /></PrivateRoute>} />
           <Route path="/no" element={<Error />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LogIn />} />
@@ -61,7 +64,7 @@ function App() {
         <Footer />
       </BrowserRouter>
     </DataProvider>
-    </>
+    </>  
   );
 }
 

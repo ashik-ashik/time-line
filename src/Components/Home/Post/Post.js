@@ -73,6 +73,7 @@ const Post = () => {
               <h5>Post Privacy:</h5> 
               <select name="postPrivacy" {...register("postPrivacy")}>
                 <option value="127758">&#127758; Public</option>
+                <option value="128101">&#128101; Member</option>
                 <option value="128274">&#128274; Private</option>
               </select>
             </div>

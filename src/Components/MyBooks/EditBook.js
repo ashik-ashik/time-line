@@ -24,9 +24,9 @@ const EditBook = () => {
   setValue("returnedAt", book?.returnedAt);
   setValue("type", book?.type);
   setValue("key", book?.key);
-  setValue("key", book?.story);
-  setValue("key", book?.page);
-  setValue("key", book?.price);
+  setValue("story", book?.story);
+  setValue("page", book?.page);
+  setValue("price", book?.price);
 
   const {id} = useParams();
 
