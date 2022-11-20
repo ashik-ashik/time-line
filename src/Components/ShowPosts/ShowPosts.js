@@ -33,7 +33,7 @@ const ShowPosts = ({data, maxCon}) => {
   return (
     <>
       {
-            data?.map((post, i) => <div key={post?._id} className="post" >
+            data?.map((post, i) => <div key={i} className="post" >
               {i !== 0 && <hr />}
               <div className="post-grid" style={{marginTop:i===0 ? '20px' : '0'}}>
                 <div className="user-photo">

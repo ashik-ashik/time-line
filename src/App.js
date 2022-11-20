@@ -27,6 +27,9 @@ import Gifted from "./Components/MyBooks/Filters/Gifted";
 import AllBooks from "./Components/MyBooks/Filters/AllBooks";
 import PrivateRoute from "./Components/Common/PrivateRoute/PrivateRoute";
 import AdminRoute from "./Components/AdminRoute/AdminRoute";
+import Passwords from "./Components/Passwords/Passwords";
+import AccountPasswords from "./Components/Passwords/Actions/AccountPasswords";
+import SpecialRoute from "./Components/Common/SpecialRoute/SpecialRoute";
 
   firebaseInit();
   
@@ -39,12 +42,11 @@ function App() {
         <Modal />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>} />
           <Route path="/addnew" element={<AdminRoute><Addnew /></AdminRoute>} />
           <Route path="/edit/:postId" element={<AdminRoute><EditPost /></AdminRoute>} />
           <Route path="/timeline" element={<PrivateRoute><TimeLine /></PrivateRoute>} />
           <Route path="/dairy" element={<PrivateRoute><Dairy /></PrivateRoute>} />
-          <Route path="/mybooks" element={<PrivateRoute><MyBooks /></PrivateRoute>}>
+          <Route path="/mybooks" element={<AdminRoute><MyBooks /></AdminRoute>}>
             <Route path="" element={<AllBooks />} />
             <Route path="myself" element={<MySelf />} />
             <Route path="read" element={<ReadBook />} />
@@ -57,6 +59,10 @@ function App() {
           <Route path="/editbook/:id" element={<AdminRoute><EditBook /></AdminRoute>} />
           <Route path="/tags/:tagName" element={<PrivateRoute><TaggedPosts /></PrivateRoute>} />
           <Route path="/timeline/:id" element={<PrivateRoute><SingleOne /></PrivateRoute>} />
+          <Route path="/passwords" element={<SpecialRoute><Passwords /></SpecialRoute>} />
+          <Route path="/platforms/:platform" element={<SpecialRoute><AccountPasswords /></SpecialRoute>}>
+            {/* <Route path=":flatform" element={<Passwords />} /> */}
+          </Route>
           <Route path="/no" element={<Error />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LogIn />} />

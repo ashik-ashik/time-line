@@ -1,11 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import "../../Styles/MyBooks/MyBooks.scss"
 
 
 const AddBook = () => {
   const {register, handleSubmit} = useForm();
+  const location = useLocation();
 
   const addBook = data => {
     console.log(data);
@@ -21,7 +22,8 @@ const AddBook = () => {
     })
     .then(res => {
       if(res.status === 200){
-        window.location.replace('/mybooks');
+        // window.location.replace(`/${location}`);
+        <Navigate to={location} />
       }
     });
 

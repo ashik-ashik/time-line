@@ -21,7 +21,7 @@ const useFirebase = () => {
       // setLoading(true)
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          setUser(user)
+          setUser(user || [])
           const uid = user.uid;
         } else {
           setUser([])

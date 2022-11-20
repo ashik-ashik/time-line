@@ -3,9 +3,9 @@ import useData from '../../hooks/useData/UseData';
 import ShowPosts from '../ShowPosts/ShowPosts';
 
 const Dairy = () => {
-  const {data, user, member} = useData();
+  const {data, member} = useData();
   const dairy = data?.filter(post => post?.postType?.toLowerCase() === "dairy" );
-  const showDairy = dairy?.filter(post => member?.role !== 'admin' ? post?.postPrivacy === '127758' : post?.postPrivacy !== '' );
+  const showDairy = dairy?.filter(({postPrivacy}) => (member?.role === 'viewer' && postPrivacy === '127758') || (member?.role === 'special' && postPrivacy === '128101') || (member?.role === 'admin' && postPrivacy !== '') );
 
   return (
     <>
@@ -14,7 +14,7 @@ const Dairy = () => {
           <h2>Dairy Posts:</h2>
           <br />
           {
-            dairy?.length > 0 &&  <ShowPosts data={showDairy} />
+            dairy?.length > 0 &&  <ShowPosts  maxCon={'...'} data={showDairy} />
              
           }
           {dairy?.length === 0 && <h3>There are no Dairy!</h3>}

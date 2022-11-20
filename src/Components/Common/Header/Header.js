@@ -4,7 +4,7 @@ import useData from '../../../hooks/useData/UseData';
 import "../../../Styles/Common/header.scss"
 
 const Header = () => {
-  const {user} = useData();
+  const {user, member} = useData();
   return (
     <header>
       <div className="header-container">
@@ -16,9 +16,9 @@ const Header = () => {
             <li>
               <Link className='link' to='/'>Home</Link>
             </li>
-            <li>
+            {member?.role ==='admin' && <li>
               <Link className='link' to='/addnew'>Add New</Link>
-            </li>
+            </li>}
             <li>
               <Link className='link' to='/timeline'>Timeline</Link>
             </li>

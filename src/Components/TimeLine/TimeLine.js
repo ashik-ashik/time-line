@@ -3,10 +3,10 @@ import useData from '../../hooks/useData/UseData';
 import ShowPosts from '../ShowPosts/ShowPosts';
 
 const TimeLine = () => {
-  const {data, user, member} = useData();
+  const {data, member} = useData();
   const timeline = data?.filter(post => post.postType.toLowerCase() === 'timeline' );
-  const showTimeline = timeline?.filter(post => member?.role !== "admin" ? post?.postPrivacy === "127758" : post?.postPrivacy !== '');
-  console.log(timeline);
+  const showTimeline = timeline?.filter(({postPrivacy}) => (member?.role === "viewer" && postPrivacy === "127758") || (member?.role === 'special' && postPrivacy !== '128101') || (member?.role === "admin" && postPrivacy !== ""));
+  // console.log(timeline);
   return (
     <>
       <article>
@@ -14,7 +14,7 @@ const TimeLine = () => {
           <h2>Time Line Posts:</h2>
           <br />
           {
-            timeline?.length > 0 ? <ShowPosts data={showTimeline} />
+            timeline?.length > 0 ? <ShowPosts maxCon={'...'} data={showTimeline} />
               :
             <h3>There is no timeline posts!</h3>
           }

@@ -46,6 +46,15 @@ const DataProvider = ({children}) => {
       }
     }
 
+    // load passwords
+  const [passwords, setPass] = useState(null);
+  const [reloadPass, setReloadPass] = useState(false);
+  useEffect(()=>{
+    fetch(`https://radiant-refuge-40674.herokuapp.com/password/?member=${member?._id}`)
+    .then(res=>res.json())
+    .then(result=>setPass(result || []))
+  },[member, reloadPass]);
+
   
   const allData = {
     data,
@@ -53,7 +62,9 @@ const DataProvider = ({children}) => {
     user,
     member,
     books,
-    deleteBook
+    deleteBook,
+    passwords,
+    setReloadPass
   }
 
   return (
