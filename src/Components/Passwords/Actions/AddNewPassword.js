@@ -4,11 +4,22 @@ import useData from '../../../hooks/useData/UseData';
 
 const AddNewPassword = ({platform, member, toggleAddPass}) => {
   const {setReloadPass} = useData();
-  const {register, handleSubmit, reset} = useForm();
+  const {register, handleSubmit, reset, setValue} = useForm();
+  const savedPassword = JSON.parse(localStorage.getItem(`${platform}`));
+  setValue('password',savedPassword);
+  const samePass =(p)=>{
+    const isSaved = JSON.parse(localStorage.getItem(`${platform}`));
+    if(!isSaved){
+      localStorage.setItem(platform, JSON.stringify(p));
+    }
+  }
   const postNewPass = data =>{
     data.platform = platform;
     data.member= member;
     data.phone = data.countryCode + (data.countryCode ==='+880' ? (data.phone.startsWith('0') && data.phone.slice(1)) : data.phone)
+    if(data.useSamePass === 'same'){
+      samePass(data.password)
+    }
     // fetch to post password
     const options ={
       method: "POST",
@@ -68,11 +79,11 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
           </div>
           <div className="form-field">
             <span>Security Key</span>
-            <input {...register('securityKey')} required type="text" placeholder='Enter securityKey' />
+            <input {...register('securityKey')} type="text" placeholder='Enter securityKey' />
           </div>
           <div className="form-field check">
             <input {...register('useSamePass')} type="checkbox" value='same' id="same" />
-            <label htmlFor="same">Use same password?</label>
+            {!savedPassword ? <label htmlFor="same">Use same password?</label> : <span>This platform Password has been saved as <q>Same Password</q>.</span>}
           </div>
           <div className="add-pass-btn">
             <button onClick={()=>toggleAddPass(false)}>Cancle</button>

@@ -4,8 +4,8 @@ import useData from '../../hooks/useData/UseData';
 import Loader from '../Common/Loader/Loader';
 
 const AdminRoute = ({children, ...rest}) => {
-  const {member} = useData();
-  if(!member){
+  const {member, user} = useData();
+  if(!member || !user?.user){
     return <Loader />
   }
   if(member?.role === 'admin'){

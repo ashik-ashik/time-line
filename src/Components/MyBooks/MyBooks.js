@@ -2,13 +2,10 @@ import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import "../../Styles/MyBooks/MyBooks.scss"
+import Loader from '../Common/Loader/Loader';
 
 const MyBooks = () => {
-  const {books} = useData();
-
-
-
-  
+  const {books} = useData();  
   
   return (
     <article>
@@ -56,7 +53,7 @@ const MyBooks = () => {
               </tr>
             </thead>
             <tbody>
-              {!books && <tr><td style={{fontWeight:'700'}} colSpan={10}>Loading...</td></tr>}
+              {!books && <Loader />}
               <Outlet />
             </tbody>
           </table>

@@ -1,36 +1,46 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import useData from '../../../hooks/useData/UseData';
 import '../../../Styles/Login/Login.scss';
 
 const LogIn = () => {
-  const {user, setUser} = useData();
-  const navigate = useNavigate();
+  const {user} = useData();
+  const [findMember, setMember] = useState(null);
 
-  const login = () => {
+    // check is the member logged in previous
+    useEffect(()=>{
+      fetch(`https://radiant-refuge-40674.herokuapp.com/members`)
+      .then(res=>res.json())
+      .then(result=> setMember(result));
+    },[user?.user])
+    const isAlreadyMember = findMember?.find(mem=> mem?.email === user?.user?.email);
+    // console.log(findMember, isAlreadyMember);
+
+  const login = async () => {
     user.googleLogin()
     .then((result) => {
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-      // // The signed-in user info.
+      
       user.setUser(result.user || []);
-      if(result.user){
-        const member = {};
-        member.name = result.user.displayName;
-        member.email = result.user.email;
-        member.photo = result.user.photoURL;
-        member.role = result.user.email === 'ashik.free999@gmail.com' || result.user.email === 'ashik.none999@gmail.com' ? 'admin':'viewer'
+      if(result.user && !isAlreadyMember){        
+        const memb = {};
+        memb.name = result.user.displayName;
+        memb.email = result.user.email;
+        memb.photo = result.user.photoURL;
+        memb.role = result.user.email === 'ashik.free999@gmail.com' || result.user.email === 'ashik.none999@gmail.com' ? 'admin':'viewer'
         const options = {
           method: "POST",
           headers : {
             'Accept' : "application/json",
             'Content-Type' : "application/json"
           },
-          body : JSON.stringify(member)
+          body : JSON.stringify(memb)
         }
         fetch(`https://radiant-refuge-40674.herokuapp.com/member`, options)
         .then(res => console.log(res.status))
-        navigate('/')
+        window.location.replace('/')
+
+
       }
       // ...
     }).catch((error) => {

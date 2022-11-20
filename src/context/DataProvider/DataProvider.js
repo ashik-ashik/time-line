@@ -9,6 +9,7 @@ const DataProvider = ({children}) => {
   const user = useFirebase();
 
   const [addedNewPost, setNewPost] = useState(false);
+  const [followAddBook, setFollowBook] = useState(false)
 
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/posts`)
@@ -28,7 +29,7 @@ const DataProvider = ({children}) => {
     fetch(`https://radiant-refuge-40674.herokuapp.com/books`)
     .then(res=>res.json())
     .then(data => setBooks(data || []))
-  },[]);
+  },[followAddBook]);
   // delete book
     // delete a books
     const deleteBook = id => {
@@ -62,6 +63,7 @@ const DataProvider = ({children}) => {
     user,
     member,
     books,
+    setFollowBook,
     deleteBook,
     passwords,
     setReloadPass
