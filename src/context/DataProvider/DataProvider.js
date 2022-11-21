@@ -55,7 +55,8 @@ const DataProvider = ({children}) => {
     .then(res=>res.json())
     .then(result=>setPass(result || []))
   },[member, reloadPass]);
-
+  
+  // member.role='admin';
   
   const allData = {
     data,

@@ -30,6 +30,7 @@ import AdminRoute from "./Components/AdminRoute/AdminRoute";
 import Passwords from "./Components/Passwords/Passwords";
 import AccountPasswords from "./Components/Passwords/Actions/AccountPasswords";
 import SpecialRoute from "./Components/Common/SpecialRoute/SpecialRoute";
+import R320 from "./Components/R320/R320";
 
   firebaseInit();
   
@@ -46,6 +47,7 @@ function App() {
           <Route path="/edit/:postId" element={<AdminRoute><EditPost /></AdminRoute>} />
           <Route path="/timeline" element={<PrivateRoute><TimeLine /></PrivateRoute>} />
           <Route path="/dairy" element={<PrivateRoute><Dairy /></PrivateRoute>} />
+          {/* Books Routes */}
           <Route path="/mybooks" element={<AdminRoute><MyBooks /></AdminRoute>}>
             <Route path="" element={<AllBooks />} />
             <Route path="myself" element={<MySelf />} />
@@ -61,7 +63,10 @@ function App() {
           <Route path="/timeline/:id" element={<PrivateRoute><SingleOne /></PrivateRoute>} />
           <Route path="/passwords" element={<SpecialRoute><Passwords /></SpecialRoute>} />
           <Route path="/platforms/:platform" element={<SpecialRoute><AccountPasswords /></SpecialRoute>}>
-            {/* <Route path=":flatform" element={<Passwords />} /> */}
+          </Route>
+          {/* Room 320 */}
+          <Route path="/320" element={<R320 />}>
+
           </Route>
           <Route path="/no" element={<Error />} />
           <Route path="/about" element={<About />} />

@@ -1,0 +1,229 @@
+.r320{
+  width: 100%;
+  background: #000000ce;
+}
+.r320-container{
+  width: 95%;
+  max-width: 1100px;
+  min-height: 90vh;
+  margin: 0 auto;
+}
+.r320-grid{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 15px;
+  padding: 20px 0;
+  @media screen and (max-width:800px) {
+    grid-template-columns: 1fr;    
+  }
+
+  // member show
+  .r320-members{
+    div.members{
+      span{
+        margin-bottom: 10px;
+        text-decoration: none;
+        display: block;
+        padding: 10px 20px;
+        background: linear-gradient(#026102, #5ce75c);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        small{
+          font-size: 10px;
+        }
+        small::before{
+          content: 'Room No:';
+          font-size: 10px;
+        }
+      }
+    }
+    .add-member-btn{
+      button{
+        border: none;
+        background: linear-gradient(yellow, darkorange);
+        padding: 7px 25px;
+        border-radius: 4px;
+        color: #eee;
+        font-weight: 600;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+    }
+    .calculation{
+      margin-top: 20px;
+      div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span{
+          color: #eee;
+          font-weight: 600;
+        }
+      }
+      hr{
+        margin: 5px 0;
+      }
+    }
+  }
+
+  // contents show
+  .r320-content{
+    .content{
+      border: 1px solid #cacacae7;
+      padding: 5px;
+      .table-title{
+        background: #e92300;
+        color: #eee;
+        font-weight: 700;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+      }
+      .r320-action{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        form{
+          input{
+            background: linear-gradient(red, darkred);
+            color: #eee;
+            font-weight: 600;
+            padding: 10px 20px;
+            outline: none;
+            border: none;
+          }
+          input::placeholder{
+            color: #eee;
+          }
+          button{
+            margin-left: 5px;
+          }
+        }
+        .add-btn{
+          border: none;
+          padding: 10px 30px;
+          border-radius: 8px;
+          color: #eee;
+          font-weight: 600;
+          font-size: 14px;
+          text-transform: uppercase;
+          cursor: pointer;
+          background: linear-gradient(red, darkred);
+        }
+        .add-btn:hover{
+          background: linear-gradient(#ff401e, #aa1a00);
+        }
+      }
+    }
+      table{
+        border: 1px solid #e9e9e9;
+        border-collapse: collapse;
+        width: 100%;
+
+        thead > tr{
+          background: linear-gradient(#850791, #3b0241);
+          th{
+            padding: 7px;
+            color: #eee;
+            border-right: 1px solid #b232fc;
+          }
+        }
+        tbody {
+          td{
+            padding: 6px;
+            font-weight: 600;
+            border: 1px solid #eee;
+            color: #eee;
+          }
+          tr:nth-child(even){
+            background: linear-gradient(#11c5ad, #044642);
+          }
+          tr:nth-child(odd){
+            background: linear-gradient(#f03a1a, #911601);
+          }
+        }
+      }
+
+      .r320-deposit{
+        margin-top: 20px;
+      }
+  }
+}
+
+// modal
+.r320-modal{
+  width: 100%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: #5c0101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  .r320-inner-modal{
+    width: 95%;
+    max-width: 700px;
+
+    .modal-btn{
+      display: flex;
+      justify-content: flex-end;
+      .add-btn{
+        border: none;
+        padding: 10px 30px;
+        border-radius: 8px;
+        color: #eee;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        cursor: pointer;
+        background: linear-gradient(red, darkred);
+      }
+      .add-btn:hover{
+        background: linear-gradient(#ff401e, #aa1a00);
+      }
+    }
+    h4{
+      color: #eee;
+      margin: 10px 0;
+    }
+
+    // modal form
+    .r320-modal-form{
+      display: block;
+      .form-field{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        input, textarea{
+          outline: none;
+          border: 1px solid #eee;
+          padding: 7px 10px;
+          font-weight: 500;
+          background: transparent;
+          color: #fff;
+        }
+        input:focus{
+          border: 1px solid #f75a00;
+        }
+        input::placeholder{
+          color: #eee;
+        }
+        
+        span{
+          color: #eee;
+          font-size: 13px;
+          font-weight: 600;
+          display: inline-block;
+          margin-bottom: 5px;
+        }
+        small{
+          color: #f1f1f1;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
