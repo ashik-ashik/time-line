@@ -57,6 +57,9 @@ const DataProvider = ({children}) => {
   },[member, reloadPass]);
   
   // member.role='admin';
+  const [observeAddNewPay, setObserveAddNewPay]= useState(false);
+  const [observeAddNewCost, setObserveAddNewCost] = useState(false);
+
   
   const allData = {
     data,
@@ -67,7 +70,11 @@ const DataProvider = ({children}) => {
     setFollowBook,
     deleteBook,
     passwords,
-    setReloadPass
+    setReloadPass,
+    observeAddNewCost,
+    observeAddNewPay,
+    setObserveAddNewPay,
+    setObserveAddNewCost
   }
 
   return (

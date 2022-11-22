@@ -21,7 +21,7 @@ const Home = () => {
     <>
       <article>
         <section className="container">
-          {(role === 'admin' || 'special') && <>
+          {((role === 'admin') || (role === 'special')) && <>
               <ul className='mini-menu'>
                 <li>
                   <Link to='/mybooks'>My Books</Link>

@@ -7,6 +7,7 @@
   max-width: 1100px;
   min-height: 90vh;
   margin: 0 auto;
+  padding: 20px 0;
 }
 .r320-grid{
   display: grid;
@@ -83,7 +84,14 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 15px;
+        @media screen and (max-width:600px) {
+          flex-direction: column-reverse;
+        }
         form{
+        @media screen and (max-width:600px) {
+          margin-top: 10px;
+          display: flex;
+        }
           input{
             background: linear-gradient(red, darkred);
             color: #eee;
@@ -113,12 +121,24 @@
         .add-btn:hover{
           background: linear-gradient(#ff401e, #aa1a00);
         }
+        .r320-reset{
+          display: inline-block;
+          padding: 8px 10px;
+          background: linear-gradient(red, darkred);
+          font-weight: 600;
+          color: #eee;
+          margin-left: 5px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
       }
+      
     }
       table{
         border: 1px solid #e9e9e9;
         border-collapse: collapse;
         width: 100%;
+        white-space: nowrap;
 
         thead > tr{
           background: linear-gradient(#850791, #3b0241);
@@ -130,10 +150,21 @@
         }
         tbody {
           td{
-            padding: 6px;
-            font-weight: 600;
+            padding: 6px 15px;
             border: 1px solid #eee;
+            font-weight: 600;
             color: #eee;
+            .edit-btn{
+              font-weight: 600;
+              color: #eee;
+              display: inline-block;
+              border-radius: 4px;
+              background: linear-gradient(#08e408, #004200);
+              padding: 5px 10px;
+              cursor: pointer;
+              text-decoration: none;
+              text-align: center;
+            }
           }
           tr:nth-child(even){
             background: linear-gradient(#11c5ad, #044642);
@@ -144,16 +175,23 @@
         }
       }
 
-      .r320-deposit{
+      .r320-pay{
         margin-top: 20px;
       }
   }
 }
 
+.cost-table{
+  width: 100%;
+  overflow-x: auto;
+  // display: none;
+
+}
+
 // modal
 .r320-modal{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: sticky;
   top: 0;
   left: 0;
@@ -190,40 +228,67 @@
     }
 
     // modal form
-    .r320-modal-form{
-      display: block;
-      .form-field{
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-        input, textarea{
-          outline: none;
-          border: 1px solid #eee;
-          padding: 7px 10px;
-          font-weight: 500;
-          background: transparent;
-          color: #fff;
-        }
-        input:focus{
-          border: 1px solid #f75a00;
-        }
-        input::placeholder{
-          color: #eee;
-        }
-        
-        span{
-          color: #eee;
-          font-size: 13px;
-          font-weight: 600;
-          display: inline-block;
-          margin-bottom: 5px;
-        }
-        small{
-          color: #f1f1f1;
-          font-size: 12px;
-          font-weight: 500;
-        }
-      }
+  }
+}
+.r320-modal-form{
+  display: block;
+  .form-field{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    input, textarea, select{
+      outline: none;
+      border: 1px solid #eee;
+      padding: 7px 10px;
+      font-weight: 500;
+      background: transparent;
+      color: #fff;
+    }
+    input:focus{
+      border: 1px solid #f75a00;
+    }
+    input::placeholder{
+      color: #eee;
+    }
+    select{
+      background: #000;
+    }
+    
+    span{
+      color: #eee;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    small{
+      color: #f1f1f1;
+      font-size: 12px;
+      font-weight: 500;
     }
   }
+}
+
+// edit content
+.edit-btn{
+  display: flex;
+  justify-content: space-between;
+  .add-btn{
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    color: #eee;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: linear-gradient(red, darkred);
+  }
+  .add-btn:hover{
+    background: linear-gradient(#ff401e, #aa1a00);
+  }
+}
+h4{
+  color: #eee;
+  margin: 10px 0;
 }

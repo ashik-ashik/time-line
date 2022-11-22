@@ -31,6 +31,8 @@ import Passwords from "./Components/Passwords/Passwords";
 import AccountPasswords from "./Components/Passwords/Actions/AccountPasswords";
 import SpecialRoute from "./Components/Common/SpecialRoute/SpecialRoute";
 import R320 from "./Components/R320/R320";
+import UpdatePay from "./Components/R320/AddModal/UpdatePay";
+import UpdateCost from "./Components/R320/AddModal/UpdateCost";
 
   firebaseInit();
   
@@ -65,9 +67,9 @@ function App() {
           <Route path="/platforms/:platform" element={<SpecialRoute><AccountPasswords /></SpecialRoute>}>
           </Route>
           {/* Room 320 */}
-          <Route path="/320" element={<R320 />}>
-
-          </Route>
+          <Route path="/320" element={<AdminRoute><R320 /></AdminRoute>} />
+          <Route path="/pay-edit/:id" element={<AdminRoute><UpdatePay /></AdminRoute>} />
+          <Route path="/cost-edit/:id" element={<AdminRoute><UpdateCost /></AdminRoute>} />
           <Route path="/no" element={<Error />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LogIn />} />

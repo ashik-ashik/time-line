@@ -6,7 +6,9 @@ const CostModal = ({setShowCostModal, setObserveAddNewCost}) => {
 
   const {register, handleSubmit, reset} = useForm();
   const postNewCost = data => {
-    console.log(data, 'clicked');
+    if(data.date === ''){
+      data.date = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+    }
     const options = {
       method: "POST",
       headers : {
@@ -34,7 +36,7 @@ const CostModal = ({setShowCostModal, setObserveAddNewCost}) => {
         <form className="r320-modal-form" onSubmit={handleSubmit(postNewCost)}>
           <div className="form-field">
             <span>Enter Date: <sup>*</sup></span>
-            <input {...register('date', {required:true})} type="date" />
+            <input {...register('date')} type="date" />
           </div>
           <div className="form-field">
             <span>Enter Amount: <sup>*</sup></span>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddPayModal = ({setShowPayModal, setObserveAddNewPay}) => {
+const AddPayModal = ({setShowPayModal, setObserveAddNewPay, r320Member}) => {
   const {register, handleSubmit, reset} = useForm();
   const postNewPay = data => {
+    if(data.date === ''){
+      data.date = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
+    }
     const options = {
       method: "POST",
       headers : {
@@ -32,11 +35,16 @@ const AddPayModal = ({setShowPayModal, setObserveAddNewPay}) => {
         <form onSubmit={handleSubmit(postNewPay)} className="r320-modal-form">
           <div className="form-field">
             <span>Enter Name:</span>
-            <input {...register('name', {required:true})} type="text" placeholder='Enter Name' />
+            <select {...register('name', {required:true})}>
+              <option value="">Select Member</option>
+              {
+                r320Member?.map((member, i)=> <option key={i} value={member?.name}>{member?.name}</option>)
+              }
+            </select>
           </div>
           <div className="form-field">
             <span>Enter date:</span>
-            <input {...register('date', {required:true})} type="date" />
+            <input {...register('date')} type="date" />
           </div>
           <div className="form-field">
             <span>Enter Amount:</span>

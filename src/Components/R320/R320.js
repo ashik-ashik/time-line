@@ -1,23 +1,25 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import useData from '../../hooks/useData/UseData';
 import "../../Styles/R320/R320.scss"
+import Loader from '../Common/Loader/Loader';
 import AddMemberModal from './AddModal/AddMemberModal';
 import AddPayModal from './AddModal/AddPayModal';
 import CostModal from './AddModal/CostModal';
 
 const R320 = () => {
+  const {observeAddNewCost, setObserveAddNewCost, setObserveAddNewPay, observeAddNewPay} = useData();
   // costs variables
   const [isShowCostModal, setShowCostModal] = useState(false);
   const [costs, setCosts] = useState(null);
-  const [observeAddNewCost, setObserveAddNewCost] = useState(false);
-
+  
   // pays variables
   const [isShowPatModal, setShowPayModal] = useState(false);
   const [pays, setPays] = useState(null);
-  const [observeAddNewPay, setObserveAddNewPay]= useState(null);
-
+  
   // member variables
   const [isShowMemberModal, setShowMemberModal] = useState(false);
   const [r320Members, setR320Member] = useState(null);
@@ -53,11 +55,33 @@ const R320 = () => {
   const currentCosts = costs?.filter(cost => cost.date?.startsWith(currentMonth));
   const currentPays = pays?.filter(cost => cost.date?.startsWith(currentMonth));
 
-  console.log(r320Members);
+  // calculate total amount
+  const sumTotal = (tt, i)=>{
+    return tt + parseInt(i.amount)
+  }
+  const totalCosts = currentCosts?.reduce(sumTotal, 0);
+  const totalPay = currentPays?.reduce(sumTotal, 0);
 
+  // filter pays by member name
+  const {register, handleSubmit, reset} = useForm();
+  const filterPays = (data) => {
+    const filterPay = pays?.filter(cost => cost.name?.toLowerCase()?.includes((data.name).toLowerCase()));
+    setPays(filterPay);
+    reset();
+    console.log(filterPay, currentPays);
+  }
+
+  // reset Filter
+  const resetFilter = (data) => {
+    if(data === 'pay'){
+      setObserveAddNewPay(true)
+    }else{
+      setObserveAddNewCost(true);
+    }
+  }
 
   if(!costs || !pays || !r320Members){
-    return
+    return <Loader />
   }
 
 
@@ -67,7 +91,7 @@ const R320 = () => {
         isShowCostModal && <CostModal setShowCostModal={setShowCostModal} setObserveAddNewCost={setObserveAddNewCost} />
       }
       {
-        isShowPatModal && <AddPayModal setObserveAddNewPay={setObserveAddNewPay} setShowPayModal={setShowPayModal} />
+        isShowPatModal && <AddPayModal r320Member={r320Members} setObserveAddNewPay={setObserveAddNewPay} setShowPayModal={setShowPayModal} />
       }
       {
         isShowMemberModal && <AddMemberModal setShowMemberModal={setShowMemberModal} setObserveAddNewMember={setObserveAddNewMember} />
@@ -86,10 +110,16 @@ const R320 = () => {
                 </div>
               </div>
               <div className="calculation">
-                <div><span>Total Pay:</span> <span>1000</span></div>
-                <div><span>Total Costs:</span> <span>973</span></div>
+                <div><span>Total Pay:</span> <span>{totalPay}</span></div>
+                <div><span>Total Costs:</span> <span>{totalCosts}</span></div>
                 <hr />
-                <div><span>Due/Cash</span><span>27</span></div>
+                <div>
+                  <span>{totalPay >= totalCosts ? "Remaining" : "Due" }</span>
+                  <span>{totalPay - totalCosts}</span>
+                  </div>
+              </div>
+              <div className="personal-calculation">
+                <div><span></span></div>
               </div>
             </div>
 
@@ -101,6 +131,7 @@ const R320 = () => {
                     <form >
                       <input type="date" />
                       <button className='add-btn' type='submit'>Filter</button>
+                      <span onClick={()=>resetFilter('cost')} className='r320-reset'>&#8634;</span>
                     </form>
                     <button onClick={()=>setShowCostModal(true)} className='add-btn'>+ A costs</button>
                   </div>
@@ -115,47 +146,59 @@ const R320 = () => {
                         <th>SL</th>
                         <th>Date</th>
                         <th>Amount</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {
-                      currentCosts?.map((cost, i)=><tr key={i}>
+                     currentCosts?.map((cost, i)=><tr key={i}>
                         <td>{i+1}</td>
                         <td>{cost?.date}</td>
                         <td>{cost?.amount}</td>
-                      </tr>)
+                        <td><Link to={`/cost-edit/${cost?._id}`} className="edit-btn">Edit</Link></td>
+                      </tr>) 
                     }
+                      {currentCosts?.length <=0 && <tr>
+                          <td colSpan={4}>No data found.</td>
+                      </tr>}
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div className="r320-deposit content">
+              <div className="r320-pay content">
                 <div className="r320-action">
-                    <form >
-                      <input type="text" placeholder='Enter Name' />
+                    <form onSubmit={handleSubmit(filterPays)}>
+                      <input {...register('name')} type="text" placeholder='Enter Name' />
                       <button className='add-btn' type='submit'>Filter</button>
-                    </form>
+                      <span onClick={()=>resetFilter('pay')} className='r320-reset'>&#8634;</span>
+                    </form >
                     <button  onClick={()=>setShowPayModal(true)} className='add-btn'>+ A Pay</button>
                   </div>
                 <div className="table-title">
                   <h4>Pays: {monthNames[presentMonth]}, {presentYear}</h4>
                 </div>
-                <div className="deposit-table">
+                <div className="pay-table">
                   <table>
                     <thead>
                       <tr>
+                        <th>SL:</th>
                         <th>Name:</th>
                         <th>Date</th>
                         <th>Amount</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {
-                        currentPays.map((pay,i)=><tr key={i}>
+                        currentPays?.length >=0 ? currentPays.map((pay,i)=><tr key={i}>
+                          <td>{i+1}</td>
                           <td>{pay?.name}</td>
                           <td>{pay?.date}</td>
                           <td>{pay?.amount}</td>
-                        </tr>)
+                          <td><Link to={`/pay-edit/${pay?._id}`} className="edit-btn">Edit</Link></td>
+                        </tr>) : <tr>
+                          <td colSpan={5}>OOPS! No Date Found.</td>
+                        </tr>
                       }
                     </tbody>
                   </table>
