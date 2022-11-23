@@ -30,21 +30,24 @@ const R320 = () => {
   useEffect(()=>{
     fetch('https://radiant-refuge-40674.herokuapp.com/r320-costs')
     .then(res=>res.json())
-    .then(result => setCosts(result || []))
+    .then(result => setCosts(result || []));
+    setObserveAddNewCost(false)
   },[observeAddNewCost]);
 
   // load pays
   useEffect(()=>{
     fetch('https://radiant-refuge-40674.herokuapp.com/r320-pays')
     .then(res=>res.json())
-    .then(result => setPays(result || []))
+    .then(result => setPays(result || []));
+    setObserveAddNewPay(false);
   },[observeAddNewPay]);
 
   // load members r320
   useEffect(()=>{
     fetch("https://radiant-refuge-40674.herokuapp.com/r320-members")
     .then(res=>res.json())
-    .then(result => setR320Member(result))
+    .then(result => setR320Member(result));
+    setObserveAddNewMember(false);
   },[observeAddNewMember]);
 
   // find the current month's data
@@ -78,6 +81,60 @@ const R320 = () => {
     }else{
       setObserveAddNewCost(true);
     }
+  }
+
+  // collect selected id
+  const [costIdCollection, setCollection] = useState([])
+  const isSelected = (id, e) => {
+    if(e?.target?.checked){
+      const index = costIdCollection.indexOf(id);
+      // selectedCollection.push(id)
+      if(index === -1){
+        setCollection([...costIdCollection, id]);
+      }
+    }else{
+      const index = costIdCollection.indexOf(id);
+      if (index > -1) { 
+        costIdCollection.splice(index, 1);
+        setCollection([...costIdCollection]); 
+      }      
+    }
+  }
+  // delete action costs
+  const deleteMultiItem = () => {
+    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
+    .then(res=>{
+      if(res.status === 200){
+        setObserveAddNewCost(true);
+        setCollection([])
+      }
+    })
+  }
+  // collect selected pays id
+  const [payIdCollection, setPayCollection] = useState([])
+  const selectedPayId = (id, e) => {
+    if(e?.target?.checked){
+      const index = payIdCollection.indexOf(id);
+      if(index === -1){
+        setPayCollection([...payIdCollection, id]);
+      }
+    }else{
+      const index = payIdCollection.indexOf(id);
+      if (index > -1) { 
+        payIdCollection.splice(index, 1);
+        setPayCollection([...payIdCollection]); 
+      }      
+    }
+  }
+  // delete action costs
+  const deleteMultiItemPay = () => {
+    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
+    .then(res=>{
+      if(res.status === 200){
+        setObserveAddNewPay(true);
+        setPayCollection([])
+      }
+    })
   }
 
   if(!costs || !pays || !r320Members){
@@ -143,18 +200,22 @@ const R320 = () => {
                   <table>
                     <thead>
                       <tr>
+                        <th><button onClick={deleteMultiItem} className='delete-btn' disabled={(costIdCollection?.length > 0 ) ? false : true}>Delete</button></th>
                         <th>SL</th>
                         <th>Date</th>
                         <th>Amount</th>
+                        <th>Description</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {
                      currentCosts?.map((cost, i)=><tr key={i}>
+                        <td><input onChange={(e)=>isSelected(cost?._id,e)} type="checkbox" /></td>
                         <td>{i+1}</td>
                         <td>{cost?.date}</td>
                         <td>{cost?.amount}</td>
+                        <td style={{fontSize:"12px",fontWeight:500}}>{cost?.description}</td>
                         <td><Link to={`/cost-edit/${cost?._id}`} className="edit-btn">Edit</Link></td>
                       </tr>) 
                     }
@@ -181,6 +242,7 @@ const R320 = () => {
                   <table>
                     <thead>
                       <tr>
+                        <th><button onClick={deleteMultiItemPay} className='delete-btn' disabled={(payIdCollection?.length > 0) ? false : true}>Delete</button></th>
                         <th>SL:</th>
                         <th>Name:</th>
                         <th>Date</th>
@@ -191,6 +253,7 @@ const R320 = () => {
                     <tbody>
                       {
                         currentPays?.length >=0 ? currentPays.map((pay,i)=><tr key={i}>
+                          <td><input onChange={(e)=>selectedPayId(pay?._id,e)} type="checkbox" /></td>
                           <td>{i+1}</td>
                           <td>{pay?.name}</td>
                           <td>{pay?.date}</td>
