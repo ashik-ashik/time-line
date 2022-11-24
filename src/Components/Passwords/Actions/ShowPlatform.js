@@ -2,22 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "../../../Styles/Passwords/Passwords.scss"
 
-const ShowPlatform = ({platform, member}) => {
-  if(!member){
+const ShowPlatform = ({platform, member, setAddedPlatform}) => {
+  if(!member?.role){
     return <h3>Just wait a moment....</h3>
+  }
+  const deletePlatform = (id, platform) => {
+    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-platform?id=${id}&platform=${platform}`, {method:"DELETE"})
+    .then(res=>{
+      if(res.status === 200){
+        setAddedPlatform(true);
+      };
+    })
   }
   return (
     <>
       <div className="platform-container">
         {
-          platform?.map((plat,i)=> <div key={i}>
+          platform?.length > 0 ? platform?.map((plat,i)=> <div key={i}>
             <Link to={`/platforms/${plat.platform?.split(' ')?.join('-')}`}>
               {plat?.platform}
-              <span className='guide'>Your {plat?.platform} account's passwords here.</span>
+              <span className='guide'>Your account's passwords here.</span>
             </Link>
-            
+            <span onClick={()=>deletePlatform(plat?._id, plat?.platform)} className='platform-delete'>&#8861;</span>
           </div>
-          )
+          ) : <>
+          <h4>There is no platform added.</h4>
+          </>
         }
       </div>
     </>

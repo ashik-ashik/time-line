@@ -23,7 +23,6 @@ const DataProvider = ({children}) => {
         let response = await fetch(`https://radiant-refuge-40674.herokuapp.com/member/${user?.user?.email}`);
         if (response.status === 200) {
             let data = await response.json();
-            console.log(data);
             setMember(data || {});
         } else {
             // throw 'Error fetching users list'
@@ -65,7 +64,8 @@ const DataProvider = ({children}) => {
   useEffect(()=>{
     fetch(`https://radiant-refuge-40674.herokuapp.com/password/?member=${member?._id}`)
     .then(res=>res.json())
-    .then(result=>setPass(result || []))
+    .then(result=>setPass(result || []));
+    setReloadPass(false)
   },[member, reloadPass]);
   
   // member.role='admin';

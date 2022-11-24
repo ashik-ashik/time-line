@@ -10,7 +10,7 @@ import Loader from '../../Common/Loader/Loader';
 const AccountPasswords = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {platform} = useParams();
-  const {member, passwords}=useData();
+  const {member, passwords, setReloadPass}=useData();
   const [showAddPass, setAddPass] = useState(false);
 
   if(!passwords){
@@ -20,7 +20,6 @@ const AccountPasswords = () => {
   // filter pass works by platform
   const toShowPass = passwords?.filter(pass=> pass.platform === platform);
 
-
   // toggle password show and hide
   const changePassState = ()=>{
     setShowPassword(document.getElementById("check").checked);
@@ -29,7 +28,29 @@ const AccountPasswords = () => {
   // toggle add password modal
   const toggleAddPass = t =>{
     setAddPass(t)
+  };
+
+  // 
+  // 
+  // delete single password
+  const deleteSinglePass = id => {
+    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-password/${id}`, {method:"DELETE"})
+    .then(res=>{
+      if(res.status){
+        setReloadPass(true);
+      }
+    })
+  };
+  // delete all password form the platform
+  const deleteAllPassword = () => {
+    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-passwords/${platform}`, {method:"DELETE"})
+    .then(res => {
+      if(res.status === 200){
+        setReloadPass(true);
+      }
+    })
   }
+  
 
   return (
     <article className='password-container'>
@@ -64,8 +85,17 @@ const AccountPasswords = () => {
                 </thead>
                 <tbody>
                   {
-                    toShowPass?.map((password,i)=> <ShowPasswords key={i} password={password} showPassword={showPassword} i={i} />)
+                    toShowPass?.map((password,i)=> <ShowPasswords key={i} password={password} deleteSinglePass={deleteSinglePass} showPassword={showPassword} i={i} />)
                   }
+                  {toShowPass?.length > 1 &&<tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><span onClick={deleteAllPassword} className='delete-password'>Delete All</span></td>
+                  </tr>}
                 </tbody>
               </table>
             </>:<>

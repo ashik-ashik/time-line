@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ShowPasswords = ({password, i, showPassword}) => {
+const ShowPasswords = ({password, i, showPassword, deleteSinglePass}) => {
   return (
     <tr>
       <td>{(i +1)}</td>
@@ -9,7 +9,7 @@ const ShowPasswords = ({password, i, showPassword}) => {
       <td>{password?.phone || 'N/A'}</td>
       <td>{password?.userName || 'N/A'}</td>
       <td>{password?.securityKey || 'N/A'}</td>
-      <td>Comming...</td>
+      <td><span onClick={()=>deleteSinglePass(password?._id)} className='delete-password'>del</span></td>
     </tr>
   );
 };

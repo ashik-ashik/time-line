@@ -21,7 +21,7 @@ const CreatePlatform = ({setAddedPlatform, setAddNewPlatform}) => {
       if(res.status === 200){
         reset();
       }
-      setAddedPlatform(false);
+      setAddedPlatform(true);
       setAddNewPlatform(false);
     })
   }
