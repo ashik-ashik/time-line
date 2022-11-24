@@ -104,6 +104,9 @@
             padding: 10px 20px;
             outline: none;
             border: none;
+            @media screen and (max-width:600px) {
+              width: 180px;
+            }
           }
           input::placeholder{
             color: #eee;
@@ -122,6 +125,9 @@
           text-transform: uppercase;
           cursor: pointer;
           background: linear-gradient(red, darkred);
+          @media screen and (max-width:600px) {
+            padding: 8px 15px;
+          }
         }
         .add-btn:hover{
           background: linear-gradient(#ff401e, #aa1a00);

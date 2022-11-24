@@ -17,11 +17,23 @@ const DataProvider = ({children}) => {
     .then(result => setData(result || []));
   }, [addedNewPost]);
 
-  useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/member/${user?.user?.email}`)
-    .then(res => res.json())
-    .then(result => setMember(result || []));
-  },[user?.user]);
+  useEffect( ()=>{
+    const fetchData = async () => {
+      try {
+        let response = await fetch(`https://radiant-refuge-40674.herokuapp.com/member/${user?.user?.email}`);
+        if (response.status === 200) {
+            let data = await response.json();
+            console.log(data);
+            setMember(data || {});
+        } else {
+            // throw 'Error fetching users list'
+        }
+      } catch (error) {
+          // setIsError(true)
+      }
+    }
+    fetchData();
+  },[user?.user?.email]);
 
   // load books
   const [books, setBooks] = useState(null)

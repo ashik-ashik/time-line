@@ -13,6 +13,11 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
       localStorage.setItem(platform, JSON.stringify(p));
     }
   }
+
+  const removeSavedPass = () => {
+    localStorage.removeItem(platform);
+    console.log(platform);
+  }
   const postNewPass = data =>{
     data.platform = platform;
     data.member= member;
@@ -83,7 +88,12 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
           </div>
           <div className="form-field check">
             <input {...register('useSamePass')} type="checkbox" value='same' id="same" />
-            {!savedPassword ? <label htmlFor="same">Use same password?</label> : <span>This platform Password has been saved as <q>Same Password</q>.</span>}
+            {!savedPassword ? <label htmlFor="same">
+              Use same password?
+              </label> : <span>
+                This platform Password has been saved as <q>Same Password</q>.
+                 <span onClick={removeSavedPass} className='saved-pass-reset'>&#8634;</span>
+                </span>}
           </div>
           <div className="add-pass-btn">
             <button onClick={()=>toggleAddPass(false)}>Cancle</button>

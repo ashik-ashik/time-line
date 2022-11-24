@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import useData from '../../hooks/useData/UseData';
 import  '../../Styles/PostDesign/PostDesign.scss';
+import Loader from '../Common/Loader/Loader';
 
 const SingleOne = () => {
   const {user, member} = useData();
@@ -35,9 +36,7 @@ const SingleOne = () => {
  
 
   if(!post){
-    return <div className="container">
-      <h3>Loading...</h3>
-    </div>
+    return <Loader />
   }
 
   if(member?.role !== 'admin'){

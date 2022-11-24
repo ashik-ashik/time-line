@@ -6,10 +6,10 @@ import Loader from '../Loader/Loader';
 const PrivateRoute = ({children, ...rest}) => {
   const {user} = useData();
   const location = useLocation();
-  if(!user?.user){
+  if(!user?.user?.email){
     return <Loader />
   }
-  if(user?.user){
+  if(user?.user?.email){
     return children
   } else{
     return <Navigate to='/login' state={{from:location}} />

@@ -5,7 +5,7 @@ import Loader from '../Common/Loader/Loader';
 
 const AdminRoute = ({children, ...rest}) => {
   const {member, user} = useData();
-  if(!member || !user?.user){
+  if(!member?.role || !user?.user){
     return <Loader />
   }
   if(member?.role === 'admin'){

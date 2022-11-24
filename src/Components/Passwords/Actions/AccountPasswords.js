@@ -33,6 +33,9 @@ const AccountPasswords = () => {
 
   return (
     <article className='password-container'>
+      {
+          showAddPass && <AddNewPassword platform={platform} member={member?._id} toggleAddPass={toggleAddPass} />
+        }
       <section className="pass-inner-container">
         <h2 >Your {platform} Passwords:</h2>
         <div className="check">
@@ -70,9 +73,7 @@ const AccountPasswords = () => {
             </>
           }
         </div>
-        {
-          showAddPass && <AddNewPassword platform={platform} member={member?._id} toggleAddPass={toggleAddPass} />
-        }
+        
         <div className="add-pass-btn">
           <button onClick={()=>toggleAddPass(true)}>Add New Password</button>
         </div>
