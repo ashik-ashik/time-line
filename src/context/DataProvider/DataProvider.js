@@ -5,6 +5,7 @@ export const DataContext = new createContext();
 
 const DataProvider = ({children}) => {
   const [data, setData] = useState(null);
+  const [reloadMember, setReloadMember] = useState(false);
   const [member, setMember] = useState(null);
   const user = useFirebase();
 
@@ -24,15 +25,14 @@ const DataProvider = ({children}) => {
         if (response.status === 200) {
             let data = await response.json();
             setMember(data || {});
-        } else {
-            // throw 'Error fetching users list'
+            setReloadMember(false)
         }
       } catch (error) {
           // setIsError(true)
       }
     }
     fetchData();
-  },[user?.user?.email]);
+  },[user?.user?.email, reloadMember]);
 
   // load books
   const [books, setBooks] = useState(null)
@@ -78,6 +78,7 @@ const DataProvider = ({children}) => {
     setNewPost, 
     user,
     member,
+    setReloadMember,
     books,
     setFollowBook,
     deleteBook,

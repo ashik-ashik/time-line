@@ -5,13 +5,13 @@ import Loader from '../Loader/Loader';
 
 const SpecialRoute = ({children,...rest}) => {
   const {member, user} = useData();
-  if(!member || !user?.user){
+  if(!member?.role || !user?.user){
     return <Loader />
   }
   if(member?.role==="admin" || member?.role==='special'){
     return children;
   } else{
-    return <Navigate to='/' />
+    return <Navigate to='/no' />
   }
 };
 

@@ -126,7 +126,7 @@ const R320 = () => {
       }      
     }
   }
-  // delete action costs
+  // delete action pays
   const deleteMultiItemPay = () => {
     fetch(`https://radiant-refuge-40674.herokuapp.com/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
     .then(res=>{
@@ -135,7 +135,17 @@ const R320 = () => {
         setPayCollection([])
       }
     })
+  };
+
+  // 
+  // 
+  // filter personal pay calsulation
+  const uniques = currentPays?.filter((pp, i) => currentPays.findIndex(item => item?.name === pp?.name) === i)
+  const personalCalculation = (name ) => {
+    const personal = currentPays?.filter(cpay => cpay?.name === name)
+    return personal?.reduce(sumTotal, 0)
   }
+  console.log({uniques});
 
   if(!costs || !pays || !r320Members){
     return <Loader />
@@ -160,7 +170,7 @@ const R320 = () => {
             <div className="r320-members">
               <div className='members'>
                 {
-                r320Members?.map((mem, i) => <span key={i}>{mem?.name}<br /><small> {mem?.roomno}</small></span>)
+                uniques?.map((mem, i) => <span key={i}>{mem?.name}<br /><small> {personalCalculation(mem?.name)} TK.</small> </span>)
                 }
                 <div className="add-member-btn">
                   <button onClick={()=>setShowMemberModal(true)}>Add New Member</button>

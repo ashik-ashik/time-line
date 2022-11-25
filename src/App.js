@@ -33,6 +33,7 @@ import SpecialRoute from "./Components/Common/SpecialRoute/SpecialRoute";
 import R320 from "./Components/R320/R320";
 import UpdatePay from "./Components/R320/AddModal/UpdatePay";
 import UpdateCost from "./Components/R320/AddModal/UpdateCost";
+import Panel from "./Components/Panel/Panel";
 
   firebaseInit();
   
@@ -63,15 +64,16 @@ function App() {
           <Route path="/editbook/:id" element={<AdminRoute><EditBook /></AdminRoute>} />
           <Route path="/tags/:tagName" element={<PrivateRoute><TaggedPosts /></PrivateRoute>} />
           <Route path="/timeline/:id" element={<PrivateRoute><SingleOne /></PrivateRoute>} />
-          <Route path="/passwords" element={<Passwords />} />
-          <Route path="/platforms/:platform" element={<AccountPasswords />} />
+          <Route path="/passwords" element={<SpecialRoute><Passwords /></SpecialRoute>} />
+          <Route path="/platforms/:platform" element={<SpecialRoute><AccountPasswords /></SpecialRoute>} />
           {/* Room 320 */}
           <Route path="/320" element={<AdminRoute><R320 /></AdminRoute>} />
           <Route path="/pay-edit/:id" element={<AdminRoute><UpdatePay /></AdminRoute>} />
           <Route path="/cost-edit/:id" element={<AdminRoute><UpdateCost /></AdminRoute>} />
-          <Route path="/no" element={<Error />} />
+          <Route path="/panel" element={<AdminRoute><Panel /></AdminRoute>} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/no" element={<Error />} />
         </Routes>
         <Footer />
       </BrowserRouter>

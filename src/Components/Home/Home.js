@@ -9,10 +9,9 @@ const Home = () => {
   const {data, user, member} = useData();
   if(!data || !member || !user?.user){
     return <Loader />
-
   }
   const {role} = member;
-  const publicPosts = data?.filter(({postPrivacy}) => ((role === 'viewer' || !role) && postPrivacy === '127758') || (role === 'special' && postPrivacy === '128101') || (role === 'admin' && postPrivacy !== '') );
+  const publicPosts = data?.filter(({postPrivacy}) => ((role === 'viewer' || !role) && postPrivacy === '127758') || (role === 'special' && (postPrivacy === '128101' || postPrivacy === '127758')) || (role === 'admin' && postPrivacy !== '') );
   // const publicPosts = data?.filter(post =>  post?.postPrivacy !== '');
   // console.log(publicPosts);
 
@@ -27,7 +26,7 @@ const Home = () => {
                   <Link to='/mybooks'>My Books</Link>
                 </li>
                 <li>
-                  <Link to='/todo'>ToDo</Link>
+                  <Link to='/panel'>Panel</Link>
                 </li>
                 {<li>
                   <Link to='/320'>R 320</Link>

@@ -1,0 +1,74 @@
+.panel-members{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  @media screen and (max-width:600px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 12px;
+  }
+  .single-member-wrapper{
+    border-radius: 10px;
+    background: linear-gradient(red, darkred);
+    padding: 10px 15px;
+    .role-action{
+      margin-top: 6px;
+      button{
+        display: block;
+        border: 1px solid #ddd;
+        outline: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        width: 100%;
+        cursor: pointer;
+        background: transparent;
+        color: #eee;
+      }
+      button:hover{
+        background: #eee;
+        color: red;
+      }
+    }
+  }
+  .single-member{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h5{
+      color: #eee;
+      margin: 0;
+      sup{
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 20px;
+        background: green;
+        color: #fff;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-left: 3px;
+        font-size: 8px;
+      }
+      span{
+        font-weight: 500;
+        font-size: 10px;
+      }
+    }
+    select{
+      background: transparent;
+      outline: none;
+      border: 1px solid #e6e6e6;
+      padding: 5px 10px;
+      cursor: pointer;
+      color: #eee;
+      option{
+        color: #222;
+      }
+    }
+  }
+}
+.single-member-wrapper.me{
+  background: linear-gradient(green, darkgreen);
+  sup{
+    background: #ff004c !important;
+  }
+}

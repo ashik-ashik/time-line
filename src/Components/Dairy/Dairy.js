@@ -6,7 +6,7 @@ const Dairy = () => {
   const {data, member} = useData();
   const dairy = data?.filter(post => post?.postType?.toLowerCase() === "dairy" );
   const showDairy = dairy?.filter(({postPrivacy}) => (member?.role === 'viewer' && postPrivacy === '127758') || (member?.role === 'special' && postPrivacy === '128101') || (member?.role === 'admin' && postPrivacy !== '') );
-
+  console.log(member);
   return (
     <>
       <article>

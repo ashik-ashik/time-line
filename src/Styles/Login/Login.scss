@@ -3,6 +3,9 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
   align-items: center;
+  @media screen and (max-width:600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   .design-login{
     img{
@@ -11,6 +14,9 @@
   }
 
   .login-action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .google-login{
       outline: none;
       border: 1px solid #050549;
