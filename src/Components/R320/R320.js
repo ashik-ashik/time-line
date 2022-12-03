@@ -12,6 +12,8 @@ import CostModal from './AddModal/CostModal';
 
 const R320 = () => {
   const {observeAddNewCost, setObserveAddNewCost, setObserveAddNewPay, observeAddNewPay} = useData();
+  const [showToMonth, setShowToMonth] = useState('');
+  console.log(showToMonth);
   // costs variables
   const [isShowCostModal, setShowCostModal] = useState(false);
   const [costs, setCosts] = useState([]);
@@ -24,25 +26,50 @@ const R320 = () => {
   const [isShowMemberModal, setShowMemberModal] = useState(false);
   const [r320Members, setR320Member] = useState(null);
   const [observeAddNewMember, setObserveAddNewMember] = useState(false);
+  
+  // filter by months and year
+  const [monthlyData, setMonthlyData] = useState(null);
+  const [filterMonth, setFilterMonth] = useState(null);
+  const [getFilteredMonth, setFilteredMonth] = useState('')
+  const loadMonthlyData = (event) => {
+    event.preventDefault();
+    const selectedMonth = filterMonth?.split('-');
+    setFilteredMonth(selectedMonth[0] + selectedMonth[1]);
+    setShowToMonth((selectedMonth[0] +'-'+ selectedMonth[1])?.split('-'));
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-costs/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
+    .then(res=>res.json())
+    .then(result => setCosts(result || []));
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pays/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
+    .then(res=>res.json())
+    .then(result => setPays(result || []));
+    // setObserveAddNewPay(false);
+    // setObserveAddNewCost(false);
+  };
+  useEffect(()=>{
+    
+    setObserveAddNewCost(false)
+  },[getFilteredMonth])
 
 
     // find the current month's data
-    const monthNames = ["January","February", "March", "April", 'May', "June", "July","August","September","October","November","December"]
+    const monthNames = ['',"January","February", "March", "April", 'May', "June", "July","August","September","October","November","December"]
     const presentYear = new Date().getFullYear();
     const presentMonth = new Date().getMonth();
     const currentMonth = presentYear+'-'+ (presentMonth + 1);
 
   // load costs
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/r320-costs/?yearmonth=${currentMonth}`)
+    setShowToMonth(currentMonth?.split("-"));
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-costs/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setCosts(result || []));
-    setObserveAddNewCost(false)
+    setObserveAddNewCost(false);
   },[observeAddNewCost]);
 
   // load pays
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/r320-pays/?yearmonth=${currentMonth}`)
+    setShowToMonth(currentMonth?.split("-"));
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pays/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setPays(result || []));
     setObserveAddNewPay(false);
@@ -50,7 +77,7 @@ const R320 = () => {
 
   // load members r320
   useEffect(()=>{
-    fetch("https://time-line-server-mdashik989.vercel.app/r320-members")
+    fetch("https://time-line-server-ashikfree999.vercel.app/r320-members")
     .then(res=>res.json())
     .then(result => setR320Member(result));
     setObserveAddNewMember(false);
@@ -76,8 +103,9 @@ const R320 = () => {
   // reset Filter
   const resetFilter = (data) => {
     if(data === 'pay'){
-      setObserveAddNewPay(true)
+      setObserveAddNewPay(true);
     }else{
+      setObserveAddNewPay(true);
       setObserveAddNewCost(true);
     }
   }
@@ -101,7 +129,7 @@ const R320 = () => {
   }
   // delete action costs
   const deleteMultiItem = () => {
-    fetch(`https://time-line-server-mdashik989.vercel.app/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewCost(true);
@@ -127,7 +155,7 @@ const R320 = () => {
   }
   // delete action pays
   const deleteMultiItemPay = () => {
-    fetch(`https://time-line-server-mdashik989.vercel.app/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewPay(true);
@@ -193,16 +221,16 @@ const R320 = () => {
               <div className="r320-costs content">
                 {/* costs filter and add costs */}
                   <div className="r320-action">
-                    <form >
-                      <input type="date" />
+                    <form onSubmit={loadMonthlyData}>
+                      <input type="date" onBlur={(e)=> setFilterMonth(e.target.value)} />
                       <button className='add-btn' type='submit'>Filter</button>
-                      <span onClick={()=>resetFilter('cost')} className='r320-reset'>&#8634;</span>
+                      <button type='reset' onClick={()=>resetFilter('cost')} className='r320-reset'>&#8634;</button>
                     </form>
                     <button onClick={()=>setShowCostModal(true)} className='add-btn'>+ A costs</button>
                   </div>
                   {/* cost table title */}
                   <div className="table-title">
-                    <h4>Costs: {monthNames[presentMonth]}, {presentYear}</h4>
+                    <h4>Costs: {monthNames[showToMonth[1]]}, {showToMonth[0]}</h4>
                   </div>
                 <div className="cost-table">
                   <table>
@@ -244,7 +272,7 @@ const R320 = () => {
                     <button  onClick={()=>setShowPayModal(true)} className='add-btn'>+ A Pay</button>
                   </div>
                 <div className="table-title">
-                  <h4>Pays: {monthNames[presentMonth]}, {presentYear}</h4>
+                  <h4>Pays: {monthNames[showToMonth[1]]}, {showToMonth[0]}</h4>
                 </div>
                 <div className="pay-table">
                   <table>

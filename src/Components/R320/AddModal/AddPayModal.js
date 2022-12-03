@@ -16,7 +16,7 @@ const AddPayModal = ({setShowPayModal, setObserveAddNewPay, r320Member}) => {
       },
       body : JSON.stringify(data)
     }
-    fetch('https://time-line-server-mdashik989.vercel.app/r320-pay', options)
+    fetch('https://time-line-server-ashikfree999.vercel.app/r320-pay', options)
     .then(res => {
       if(res.status === 200){
         setObserveAddNewPay(true);

@@ -34,7 +34,7 @@ const AccountPasswords = () => {
   // 
   // delete single password
   const deleteSinglePass = id => {
-    fetch(`https://time-line-server-mdashik989.vercel.app/delete-password/${id}`, {method:"DELETE"})
+    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-password/${id}`, {method:"DELETE"})
     .then(res=>{
       if(res.status){
         setReloadPass(true);
@@ -43,7 +43,7 @@ const AccountPasswords = () => {
   };
   // delete all password form the platform
   const deleteAllPassword = () => {
-    fetch(`https://time-line-server-mdashik989.vercel.app/delete-passwords/${platform}`, {method:"DELETE"})
+    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-passwords/${platform}`, {method:"DELETE"})
     .then(res => {
       if(res.status === 200){
         setReloadPass(true);

@@ -11,7 +11,7 @@ const ShowPosts = ({data, maxCon}) => {
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
-      fetch(`https://time-line-server-mdashik989.vercel.app/delete/${id}`,{
+      fetch(`https://time-line-server-ashikfree999.vercel.app/delete/${id}`,{
         method: "DELETE"
       })
       .then(res => res.json())

@@ -20,7 +20,7 @@ const Post = () => {
   };
   
   useEffect(()=>{
-      fetch(`https://time-line-server-mdashik989.vercel.app/post`, {
+      fetch(`https://time-line-server-ashikfree999.vercel.app/post`, {
       method: "POST",
       headers : {
         'Accept' : "application/json",

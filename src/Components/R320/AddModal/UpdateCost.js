@@ -10,7 +10,7 @@ const UpdateCost = () => {
   const [cost, setCost] = useState(null);
   const navigate = useNavigate();
   useEffect(()=> {
-    fetch(`https://time-line-server-mdashik989.vercel.app/r320-cost/${id}`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-cost/${id}`)
     .then(res=>res.json())
     .then(result=> setCost(result || []))
   }, [id]);
@@ -26,7 +26,7 @@ const UpdateCost = () => {
       },
       body : JSON.stringify(data)
     }
-    fetch(`https://time-line-server-mdashik989.vercel.app/r320-cost/${id}`, options)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-cost/${id}`, options)
     .then(res => {
       if(res.status=== 200){
         setObserveAddNewCost(true);

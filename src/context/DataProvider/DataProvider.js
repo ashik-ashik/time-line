@@ -11,9 +11,9 @@ const DataProvider = ({children}) => {
 
   const [addedNewPost, setNewPost] = useState(false);
   const [followAddBook, setFollowBook] = useState(false)
-	// https://time-line-server-mdashik989.vercel.app/posts
+	// https://time-line-server-ashikfree999.vercel.app/posts
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/posts`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/posts`)
     .then(res => res.json())
     .then(result => setData(result || []));
   }, [addedNewPost]);
@@ -21,7 +21,7 @@ const DataProvider = ({children}) => {
   useEffect( ()=>{
     const fetchData = async () => {
       try {
-        let response = await fetch(`https://time-line-server-mdashik989.vercel.app/member/${user?.user?.email}`);
+        let response = await fetch(`https://time-line-server-ashikfree999.vercel.app/member/${user?.user?.email}`);
         if (response.status === 200) {
             let data = await response.json();
             setMember(data || {});
@@ -37,7 +37,7 @@ const DataProvider = ({children}) => {
   // load books
   const [books, setBooks] = useState(null)
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/books`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/books`)
     .then(res=>res.json())
     .then(data => setBooks(data || []));
     setFollowBook(false)
@@ -47,7 +47,7 @@ const DataProvider = ({children}) => {
     const deleteBook = id => {
       const sureDel = window.confirm("Are you Sure to delete the Book");
       if(sureDel){
-        fetch(`https://time-line-server-mdashik989.vercel.app/book/${id}`,{
+        fetch(`https://time-line-server-ashikfree999.vercel.app/book/${id}`,{
           method: "DELETE"
         })
         .then(res=>res.json())
@@ -63,7 +63,7 @@ const DataProvider = ({children}) => {
   const [passwords, setPass] = useState(null);
   const [reloadPass, setReloadPass] = useState(false);
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/password/?member=${member?._id}`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/password/?member=${member?._id}`)
     .then(res=>res.json())
     .then(result=>setPass(result || []));
     setReloadPass(false)

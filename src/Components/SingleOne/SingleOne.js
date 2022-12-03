@@ -13,7 +13,7 @@ const SingleOne = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/timeline/${id}`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/timeline/${id}`)
     .then(res=>res.json())
     .then(result => setPost(result || []));
   }, [id]);
@@ -22,7 +22,7 @@ const SingleOne = () => {
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
-      fetch(`https://time-line-server-mdashik989.vercel.app/delete/${id}`,{
+      fetch(`https://time-line-server-ashikfree999.vercel.app/delete/${id}`,{
         method: "DELETE"
       })
       .then(res => res.json())

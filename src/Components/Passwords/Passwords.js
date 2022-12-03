@@ -12,7 +12,7 @@ const Passwords = () => {
   const [addNewplatform, setAddNewPlatform] = useState(false);
 
   useEffect(()=>{
-    fetch(`https://time-line-server-mdashik989.vercel.app/platform/?id=${member?._id}`)
+    fetch(`https://time-line-server-ashikfree999.vercel.app/platform/?id=${member?._id}`)
     .then(res=>res.json())
     .then(result=>setPlatform(result || []));
     setAddedPlatform(false)
