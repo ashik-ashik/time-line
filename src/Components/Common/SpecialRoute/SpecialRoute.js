@@ -5,7 +5,7 @@ import Loader from '../Loader/Loader';
 
 const SpecialRoute = ({children,...rest}) => {
   const {member, user} = useData();
-  if(!member?.role || !user?.user){
+  if(!member?.role || !user?.user?.email){
     return <Loader />
   }
   if(member?.role==="admin" || member?.role==='special'){

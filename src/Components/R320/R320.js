@@ -14,7 +14,7 @@ const R320 = () => {
   const {observeAddNewCost, setObserveAddNewCost, setObserveAddNewPay, observeAddNewPay} = useData();
   // costs variables
   const [isShowCostModal, setShowCostModal] = useState(false);
-  const [costs, setCosts] = useState(null);
+  const [costs, setCosts] = useState([]);
   
   // pays variables
   const [isShowPatModal, setShowPayModal] = useState(false);
@@ -26,9 +26,15 @@ const R320 = () => {
   const [observeAddNewMember, setObserveAddNewMember] = useState(false);
 
 
+    // find the current month's data
+    const monthNames = ["January","February", "March", "April", 'May', "June", "July","August","September","October","November","December"]
+    const presentYear = new Date().getFullYear();
+    const presentMonth = new Date().getMonth();
+    const currentMonth = presentYear+'-'+ (presentMonth + 1);
+
   // load costs
   useEffect(()=>{
-    fetch('https://radiant-refuge-40674.herokuapp.com/r320-costs')
+    fetch(`https://time-line-server-mdashik989.vercel.app/r320-costs/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setCosts(result || []));
     setObserveAddNewCost(false)
@@ -36,7 +42,7 @@ const R320 = () => {
 
   // load pays
   useEffect(()=>{
-    fetch('https://radiant-refuge-40674.herokuapp.com/r320-pays')
+    fetch(`https://time-line-server-mdashik989.vercel.app/r320-pays/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setPays(result || []));
     setObserveAddNewPay(false);
@@ -44,26 +50,20 @@ const R320 = () => {
 
   // load members r320
   useEffect(()=>{
-    fetch("https://radiant-refuge-40674.herokuapp.com/r320-members")
+    fetch("https://time-line-server-mdashik989.vercel.app/r320-members")
     .then(res=>res.json())
     .then(result => setR320Member(result));
     setObserveAddNewMember(false);
   },[observeAddNewMember]);
 
-  // find the current month's data
-  const monthNames = ["January","February", "March", "April", 'May', "June", "July","August","September","October","November","December"]
-  const presentYear = new Date().getFullYear();
-  const presentMonth = new Date().getMonth();
-  const currentMonth = presentYear+'-'+ (presentMonth + 1);
-  const currentCosts = costs?.filter(cost => cost.date?.startsWith(currentMonth));
-  const currentPays = pays?.filter(cost => cost.date?.startsWith(currentMonth));
-
   // calculate total amount
   const sumTotal = (tt, i)=>{
-    return tt + parseInt(i.amount)
+    return tt + parseInt(i?.amount)
   }
-  const totalCosts = currentCosts?.reduce(sumTotal, 0);
-  const totalPay = currentPays?.reduce(sumTotal, 0);
+  
+  const totalCosts = costs?.reduce(sumTotal, 0);
+  const totalPay = pays?.reduce(sumTotal, 0);
+
 
   // filter pays by member name
   const {register, handleSubmit, reset} = useForm();
@@ -71,7 +71,6 @@ const R320 = () => {
     const filterPay = pays?.filter(cost => cost.name?.toLowerCase()?.includes((data.name).toLowerCase()));
     setPays(filterPay);
     reset();
-    console.log(filterPay, currentPays);
   }
 
   // reset Filter
@@ -102,7 +101,7 @@ const R320 = () => {
   }
   // delete action costs
   const deleteMultiItem = () => {
-    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server-mdashik989.vercel.app/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewCost(true);
@@ -128,7 +127,7 @@ const R320 = () => {
   }
   // delete action pays
   const deleteMultiItemPay = () => {
-    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server-mdashik989.vercel.app/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewPay(true);
@@ -140,12 +139,11 @@ const R320 = () => {
   // 
   // 
   // filter personal pay calsulation
-  const uniques = currentPays?.filter((pp, i) => currentPays.findIndex(item => item?.name === pp?.name) === i)
+  const persons = pays?.filter((pp, i) => pays.findIndex(item => item?.name === pp?.name) === i)
   const personalCalculation = (name ) => {
-    const personal = currentPays?.filter(cpay => cpay?.name === name)
+    const personal = pays?.filter(cpay => cpay?.name === name)
     return personal?.reduce(sumTotal, 0)
   }
-  console.log({uniques});
 
   if(!costs || !pays || !r320Members){
     return <Loader />
@@ -170,7 +168,7 @@ const R320 = () => {
             <div className="r320-members">
               <div className='members'>
                 {
-                uniques?.map((mem, i) => <span key={i}>{mem?.name}<br /><small> {personalCalculation(mem?.name)} TK.</small> </span>)
+                persons?.map((mem, i) => <span key={i}>{mem?.name}<br /><small> {personalCalculation(mem?.name)} TK.</small> </span>)
                 }
                 <div className="add-member-btn">
                   <button onClick={()=>setShowMemberModal(true)}>Add New Member</button>
@@ -220,7 +218,7 @@ const R320 = () => {
                     </thead>
                     <tbody>
                     {
-                     currentCosts?.map((cost, i)=><tr key={i}>
+                     costs?.map((cost, i)=><tr key={i}>
                         <td><input onChange={(e)=>isSelected(cost?._id,e)} type="checkbox" /></td>
                         <td>{i+1}</td>
                         <td>{cost?.date}</td>
@@ -229,7 +227,7 @@ const R320 = () => {
                         <td><Link to={`/cost-edit/${cost?._id}`} className="edit-btn">Edit</Link></td>
                       </tr>) 
                     }
-                      {currentCosts?.length <=0 && <tr>
+                      {costs?.length <=0 && <tr>
                           <td colSpan={4}>No data found.</td>
                       </tr>}
                     </tbody>
@@ -262,7 +260,7 @@ const R320 = () => {
                     </thead>
                     <tbody>
                       {
-                        currentPays?.length >=0 ? currentPays.map((pay,i)=><tr key={i}>
+                        pays?.length >=0 ? pays.map((pay,i)=><tr key={i}>
                           <td><input onChange={(e)=>selectedPayId(pay?._id,e)} type="checkbox" /></td>
                           <td>{i+1}</td>
                           <td>{pay?.name}</td>

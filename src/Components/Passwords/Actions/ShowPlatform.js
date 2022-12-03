@@ -7,7 +7,7 @@ const ShowPlatform = ({platform, member, setAddedPlatform}) => {
     return <h3>Just wait a moment....</h3>
   }
   const deletePlatform = (id, platform) => {
-    fetch(`https://radiant-refuge-40674.herokuapp.com/delete-platform?id=${id}&platform=${platform}`, {method:"DELETE"})
+    fetch(`https://time-line-server-mdashik989.vercel.app/delete-platform?id=${id}&platform=${platform}`, {method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setAddedPlatform(true);

@@ -1,6 +1,10 @@
 .mybooks-selfs{
   min-width: 100%;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 400px;
+  @media screen and (max-width:600px) {
+    max-height: 80vh;
+  }
   
 
   // table
@@ -70,14 +74,17 @@
 }
 .mybooks-selfs::-webkit-scrollbar{
   height: 8px;
+  width: 8px;
   margin-top: 6px;
 }
 .mybooks-selfs::-webkit-scrollbar-track{
   height: 7px;
-  background: #168500;
+  width: 7px;
+  background: #c4ffb8;
+  box-shadow: inset 4px 3px 4px 4px #e9e9e9;
 }
 .mybooks-selfs::-webkit-scrollbar-thumb{
-  background: #f82e0b;
+  background: #ec005b;
   border-radius: 5px;
 }
 

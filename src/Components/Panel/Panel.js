@@ -11,7 +11,7 @@ const Panel = () => {
   
   const [members, setMembers] = useState(null);
   useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/members`)
+    fetch(`https://time-line-server-mdashik989.vercel.app/members`)
       .then(res=>res.json())
       .then(result=> setMembers(result || []));
       setReloadMembers(false);
@@ -25,7 +25,7 @@ const Panel = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({role})
     }
-    fetch(`https://radiant-refuge-40674.herokuapp.com/update-role/${id}`, options)
+    fetch(`https://time-line-server-mdashik989.vercel.app/update-role/${id}`, options)
     .then(res=>{
       if(res.status === 200){
         setReloadMembers(true)

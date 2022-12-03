@@ -40,8 +40,8 @@ const EditBook = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     };
-    // https://radiant-refuge-40674.herokuapp.com
-    fetch(`https://radiant-refuge-40674.herokuapp.com/books/${id}`, requestOptions)
+    // https://time-line-server-mdashik989.vercel.app
+    fetch(`https://time-line-server-mdashik989.vercel.app/books/${id}`, requestOptions)
     .then(res => res.json())
     .then(result =>  {
       if(result.modifiedCount){
@@ -52,7 +52,7 @@ const EditBook = () => {
   };
 
   useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/books/${id}`)
+    fetch(`https://time-line-server-mdashik989.vercel.app/books/${id}`)
     .then(res=>res.json())
     .then(result => setBook(result || []))
   },[id]);

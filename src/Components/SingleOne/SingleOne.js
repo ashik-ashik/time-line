@@ -13,7 +13,7 @@ const SingleOne = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    fetch(`https://radiant-refuge-40674.herokuapp.com/timeline/${id}`)
+    fetch(`https://time-line-server-mdashik989.vercel.app/timeline/${id}`)
     .then(res=>res.json())
     .then(result => setPost(result || []));
   }, [id]);
@@ -22,7 +22,7 @@ const SingleOne = () => {
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
-      fetch(`https://radiant-refuge-40674.herokuapp.com/delete/${id}`,{
+      fetch(`https://time-line-server-mdashik989.vercel.app/delete/${id}`,{
         method: "DELETE"
       })
       .then(res => res.json())

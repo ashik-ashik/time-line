@@ -25,7 +25,7 @@ const LogIn = () => {
               },
               body : JSON.stringify(memb)
             }
-            fetch(`https://radiant-refuge-40674.herokuapp.com/member`, options)
+            fetch(`https://time-line-server-mdashik989.vercel.app/member`, options)
                .then(res=> {
                 if(res.status === 200){
                   window.location.replace('/');

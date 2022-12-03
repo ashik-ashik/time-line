@@ -26,7 +26,7 @@ const EditPost = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
   };
-    fetch(`https://radiant-refuge-40674.herokuapp.com/edit/${postId}`, requestOptions)
+    fetch(`https://time-line-server-mdashik989.vercel.app/edit/${postId}`, requestOptions)
     .then(res => res.json())
     .then(result => {
       if(result.modifiedCount){

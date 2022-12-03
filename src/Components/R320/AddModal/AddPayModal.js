@@ -7,6 +7,7 @@ const AddPayModal = ({setShowPayModal, setObserveAddNewPay, r320Member}) => {
     if(data.date === ''){
       data.date = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();
     }
+    data.yearmonth = new Date().getFullYear() + "-" + (new Date().getMonth() + 1);
     const options = {
       method: "POST",
       headers : {
@@ -15,7 +16,7 @@ const AddPayModal = ({setShowPayModal, setObserveAddNewPay, r320Member}) => {
       },
       body : JSON.stringify(data)
     }
-    fetch('https://radiant-refuge-40674.herokuapp.com/r320-pay', options)
+    fetch('https://time-line-server-mdashik989.vercel.app/r320-pay', options)
     .then(res => {
       if(res.status === 200){
         setObserveAddNewPay(true);

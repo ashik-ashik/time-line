@@ -15,6 +15,7 @@ const Showbooks = ({deleteBook, book,i}) =>{
             <td>{book?.isBorrowed}</td>
             <td>{book?.isreturned ==='no' && book?.borrowedTo}</td>
             <td>{book?.isreturned ==='no' && book?.borrowedAt}</td>
+            <td>{i+1 <10 ? ('0'+(i+1)) : (i+1)}</td>
             <td>
               <Link to={`/editbook/${book?._id}`} className='edit'>Edit</Link>
               <button onClick={()=>deleteBook(book?._id)} className='del'>Del</button>

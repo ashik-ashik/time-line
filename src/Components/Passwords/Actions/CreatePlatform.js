@@ -9,7 +9,7 @@ const CreatePlatform = ({setAddedPlatform, setAddNewPlatform}) => {
     data.member = member?._id;
     data.platform = data?.platform?.split(' ')?.join('-');
 
-    fetch('https://radiant-refuge-40674.herokuapp.com/platform',{
+    fetch('https://time-line-server-mdashik989.vercel.app/platform',{
       method: "POST",
       headers : {
         'Accept' : "application/json",

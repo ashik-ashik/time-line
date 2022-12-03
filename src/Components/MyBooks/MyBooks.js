@@ -49,6 +49,7 @@ const MyBooks = () => {
                 <th>Borrow Status:</th>
                 <th>Borrowed To:</th>
                 <th>Borrowed At:</th>
+                <th>SL:</th>
                 <th>Action:</th>
               </tr>
             </thead>

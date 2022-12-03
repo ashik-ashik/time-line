@@ -11,7 +11,7 @@ const ShowPosts = ({data, maxCon}) => {
   const deletePost = id => {
     const confirmDelete = window.confirm("Are you Sure??");
     if(confirmDelete){
-      fetch(`https://radiant-refuge-40674.herokuapp.com/delete/${id}`,{
+      fetch(`https://time-line-server-mdashik989.vercel.app/delete/${id}`,{
         method: "DELETE"
       })
       .then(res => res.json())
@@ -90,7 +90,7 @@ const ShowPosts = ({data, maxCon}) => {
                   </div>
                   <div className='tags'>{post?.postTag && <Link to={`/tags/${post?.postTag}`}>{post?.postTag}</Link>}</div>
                   <div className="admin">
-                    <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{ member?.role !== "admin" ? post?.postAuthor : 'Admin'}</a></span>
+                    <span>Posted By: <a href={`mailto:${post?.authorEmail}`}>{ member?.role === "admin" ? post?.postAuthor : 'Admin'}</a></span>
                   </div>
                   {/* count post contant words and paragraphs */}
                   <p className="content-count">

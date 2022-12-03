@@ -34,7 +34,7 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
       },
       body : JSON.stringify(data)
     };
-    fetch('https://radiant-refuge-40674.herokuapp.com/password', options)
+    fetch('https://time-line-server-mdashik989.vercel.app/password', options)
     .then(res=>{
       if(res.status === 200){
         toggleAddPass(false);

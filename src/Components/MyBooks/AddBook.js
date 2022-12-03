@@ -13,8 +13,8 @@ const AddBook = () => {
   const addBook = data => {
     console.log(data);
     data.isreturned = '';
-    // https://radiant-refuge-40674.herokuapp.com
-    fetch(`https://radiant-refuge-40674.herokuapp.com/books`, {
+    // https://time-line-server-mdashik989.vercel.app
+    fetch(`https://time-line-server-mdashik989.vercel.app/books`, {
       method: "POST",
       headers : {
         'Accept' : "application/json",
@@ -25,7 +25,6 @@ const AddBook = () => {
     .then(res => {
       if(res.status === 200){
         setFollowBook(true)
-        // window.location.replace(`/${location}`);
         navigate('/mybooks')
       }
     });

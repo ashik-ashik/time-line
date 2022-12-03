@@ -20,7 +20,7 @@ const Post = () => {
   };
   
   useEffect(()=>{
-      fetch(`https://radiant-refuge-40674.herokuapp.com/post`, {
+      fetch(`https://time-line-server-mdashik989.vercel.app/post`, {
       method: "POST",
       headers : {
         'Accept' : "application/json",
