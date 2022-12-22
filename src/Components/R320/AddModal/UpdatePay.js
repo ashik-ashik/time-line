@@ -14,7 +14,7 @@ const UpdatePay = () => {
   const [pay, setPay] = useState(null);
   const navigate = useNavigate();
   useEffect(()=> {
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pay/${id}`)
+    fetch(`https://time-line-server.vercel.app/r320-pay/${id}`)
     .then(res=>res.json())
     .then(result=> setPay(result || []))
   }, [id]);
@@ -29,7 +29,7 @@ const UpdatePay = () => {
       },
       body : JSON.stringify(data)
     }
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pay/${id}`, options)
+    fetch(`https://time-line-server.vercel.app/r320-pay/${id}`, options)
     .then(res => {
       if(res.status=== 200){
         setObserveAddNewPay(true);
@@ -40,7 +40,7 @@ const UpdatePay = () => {
   }
     // load members r320
     useEffect(()=>{
-      fetch("https://time-line-server-ashikfree999.vercel.app/r320-members")
+      fetch("https://time-line-server.vercel.app/r320-members")
       .then(res=>res.json())
       .then(result => setR320Member(result))
     },[id]);

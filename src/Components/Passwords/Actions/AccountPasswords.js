@@ -12,6 +12,8 @@ const AccountPasswords = () => {
   const {platform} = useParams();
   const {member, passwords, setReloadPass}=useData();
   const [showAddPass, setAddPass] = useState(false);
+  const [msg, setMsg] = useState('');
+
 
   if(!passwords){
     return <Loader />
@@ -34,7 +36,7 @@ const AccountPasswords = () => {
   // 
   // delete single password
   const deleteSinglePass = id => {
-    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-password/${id}`, {method:"DELETE"})
+    fetch(`https://time-line-server.vercel.app/delete-password/${id}`, {method:"DELETE"})
     .then(res=>{
       if(res.status){
         setReloadPass(true);
@@ -43,7 +45,7 @@ const AccountPasswords = () => {
   };
   // delete all password form the platform
   const deleteAllPassword = () => {
-    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-passwords/${platform}`, {method:"DELETE"})
+    fetch(`https://time-line-server.vercel.app/delete-passwords/${platform}`, {method:"DELETE"})
     .then(res => {
       if(res.status === 200){
         setReloadPass(true);
@@ -51,6 +53,7 @@ const AccountPasswords = () => {
     })
   }
   
+  console.log(passwords);
 
   return (
     <article className='password-container'>
@@ -69,6 +72,7 @@ const AccountPasswords = () => {
           }
         </div>
         <div className="show-pass">
+        {msg && <span className="tooltip">{msg}</span>}
           {
             toShowPass?.length > 0 ? <>
               <table>
@@ -79,13 +83,15 @@ const AccountPasswords = () => {
                     <th>Email:</th>
                     <th>Phone</th>
                     <th>Username</th>
+                    <th>IP</th>
                     <th>Security Key</th>
                     <th>Action</th>
+                    <th>Additional Note</th>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    toShowPass?.map((password,i)=> <ShowPasswords key={i} password={password} deleteSinglePass={deleteSinglePass} showPassword={showPassword} i={i} />)
+                    toShowPass?.map((password,i)=> <ShowPasswords key={i} setMsg={setMsg} msg={msg} password={password} deleteSinglePass={deleteSinglePass} showPassword={showPassword} i={i} />)
                   }
                   {toShowPass?.length > 1 &&<tr>
                     <td></td>
@@ -94,7 +100,9 @@ const AccountPasswords = () => {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td><span onClick={deleteAllPassword} className='delete-password'>Delete All</span></td>
+                    <td></td>
                   </tr>}
                 </tbody>
               </table>
@@ -108,6 +116,7 @@ const AccountPasswords = () => {
           <button onClick={()=>toggleAddPass(true)}>Add New Password</button>
         </div>
       </section>
+      
     </article>
   );
 };

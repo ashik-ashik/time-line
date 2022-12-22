@@ -26,7 +26,7 @@ const EditPost = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
   };
-    fetch(`https://time-line-server-ashikfree999.vercel.app/edit/${postId}`, requestOptions)
+    fetch(`https://time-line-server.vercel.app/edit/${postId}`, requestOptions)
     .then(res => res.json())
     .then(result => {
       if(result.modifiedCount){

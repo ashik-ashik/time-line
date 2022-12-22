@@ -36,10 +36,10 @@ const R320 = () => {
     const selectedMonth = filterMonth?.split('-');
     setFilteredMonth(selectedMonth[0] + selectedMonth[1]);
     setShowToMonth((selectedMonth[0] +'-'+ selectedMonth[1])?.split('-'));
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-costs/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
+    fetch(`https://time-line-server.vercel.app/r320-costs/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
     .then(res=>res.json())
     .then(result => setCosts(result || []));
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pays/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
+    fetch(`https://time-line-server.vercel.app/r320-pays/?yearmonth=${selectedMonth[0] +'-'+ selectedMonth[1]}`)
     .then(res=>res.json())
     .then(result => setPays(result || []));
     // setObserveAddNewPay(false);
@@ -60,7 +60,7 @@ const R320 = () => {
   // load costs
   useEffect(()=>{
     setShowToMonth(currentMonth?.split("-"));
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-costs/?yearmonth=${currentMonth}`)
+    fetch(`https://time-line-server.vercel.app/r320-costs/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setCosts(result || []));
     setObserveAddNewCost(false);
@@ -69,7 +69,7 @@ const R320 = () => {
   // load pays
   useEffect(()=>{
     setShowToMonth(currentMonth?.split("-"));
-    fetch(`https://time-line-server-ashikfree999.vercel.app/r320-pays/?yearmonth=${currentMonth}`)
+    fetch(`https://time-line-server.vercel.app/r320-pays/?yearmonth=${currentMonth}`)
     .then(res=>res.json())
     .then(result => setPays(result || []));
     setObserveAddNewPay(false);
@@ -77,7 +77,7 @@ const R320 = () => {
 
   // load members r320
   useEffect(()=>{
-    fetch("https://time-line-server-ashikfree999.vercel.app/r320-members")
+    fetch("https://time-line-server.vercel.app/r320-members")
     .then(res=>res.json())
     .then(result => setR320Member(result));
     setObserveAddNewMember(false);
@@ -129,7 +129,7 @@ const R320 = () => {
   }
   // delete action costs
   const deleteMultiItem = () => {
-    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server.vercel.app/delete-cost/?ids=${costIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewCost(true);
@@ -155,7 +155,7 @@ const R320 = () => {
   }
   // delete action pays
   const deleteMultiItemPay = () => {
-    fetch(`https://time-line-server-ashikfree999.vercel.app/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
+    fetch(`https://time-line-server.vercel.app/delete-pay/?ids=${payIdCollection}`,{method:"DELETE"})
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewPay(true);

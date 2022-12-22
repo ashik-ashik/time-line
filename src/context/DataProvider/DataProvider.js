@@ -1,33 +1,44 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { useReducer } from 'react';
+import { error, loadBooks, loading, loadPosts } from '../../hooks/actionCreator/actionCreator';
+import { dataReducer, initialState } from '../../hooks/dataReducer/dataReducer';
 import useFirebase from '../../hooks/useFirebase/useFirebase';
 
 export const DataContext = new createContext();
 
 const DataProvider = ({children}) => {
-  const [data, setData] = useState(null);
   const [reloadMember, setReloadMember] = useState(false);
   const [member, setMember] = useState(null);
   const user = useFirebase();
+  const [state, dispatch] = useReducer(dataReducer, initialState);
+  // console.log(state.posts);
 
   const [addedNewPost, setNewPost] = useState(false);
   const [followAddBook, setFollowBook] = useState(false)
-	// https://time-line-server-ashikfree999.vercel.app/posts
+	// https://time-line-server.vercel.app/posts
   useEffect(()=>{
-    fetch(`https://time-line-server-ashikfree999.vercel.app/posts`)
+    dispatch(()=>loading());
+    try{
+      fetch(`https://time-line-server.vercel.app/posts`)
     .then(res => res.json())
-    .then(result => setData(result || []));
+    .then(result => dispatch(loadPosts(result || [])));
+    }catch (err) {
+      console.log(err);
+      dispatch(()=>error('Fail to load!'));
+    }
   }, [addedNewPost]);
 
   useEffect( ()=>{
     const fetchData = async () => {
       try {
-        let response = await fetch(`https://time-line-server-ashikfree999.vercel.app/member/${user?.user?.email}`);
+        let response = await fetch(`https://time-line-server.vercel.app/member/${user?.user?.email}`);
         if (response.status === 200) {
             let data = await response.json();
             setMember(data || {});
             setReloadMember(false)
         }
-      } catch (error) {
+      } catch (err) {
+        console.log(err);
           // setIsError(true)
       }
     }
@@ -35,19 +46,22 @@ const DataProvider = ({children}) => {
   },[user?.user?.email, reloadMember]);
 
   // load books
-  const [books, setBooks] = useState(null)
   useEffect(()=>{
-    fetch(`https://time-line-server-ashikfree999.vercel.app/books`)
+    try{
+      fetch(`https://time-line-server.vercel.app/books`)
     .then(res=>res.json())
-    .then(data => setBooks(data || []));
+    .then(data => dispatch(loadBooks(data || [])));
     setFollowBook(false)
+    } catch (err){
+
+    }
   },[followAddBook]);
   // delete book
     // delete a books
     const deleteBook = id => {
       const sureDel = window.confirm("Are you Sure to delete the Book");
       if(sureDel){
-        fetch(`https://time-line-server-ashikfree999.vercel.app/book/${id}`,{
+        fetch(`https://time-line-server.vercel.app/book/${id}`,{
           method: "DELETE"
         })
         .then(res=>res.json())
@@ -63,7 +77,7 @@ const DataProvider = ({children}) => {
   const [passwords, setPass] = useState(null);
   const [reloadPass, setReloadPass] = useState(false);
   useEffect(()=>{
-    fetch(`https://time-line-server-ashikfree999.vercel.app/password/?member=${member?._id}`)
+    fetch(`https://time-line-server.vercel.app/password/?member=${member?._id}`)
     .then(res=>res.json())
     .then(result=>setPass(result || []));
     setReloadPass(false)
@@ -75,12 +89,12 @@ const DataProvider = ({children}) => {
 
   
   const allData = {
-    data,
+    data: state.posts,
     setNewPost, 
     user,
     member,
     setReloadMember,
-    books,
+    books: state.books,
     setFollowBook,
     deleteBook,
     passwords,

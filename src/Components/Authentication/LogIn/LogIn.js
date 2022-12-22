@@ -25,7 +25,7 @@ const LogIn = () => {
               },
               body : JSON.stringify(memb)
             }
-            fetch(`https://time-line-server-ashikfree999.vercel.app/member`, options)
+            fetch(`https://time-line-server.vercel.app/member`, options)
                .then(res=> {
                 if(res.status === 200){
                   window.location.replace('/');

@@ -21,7 +21,7 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
   const postNewPass = data =>{
     data.platform = platform;
     data.member= member;
-    data.phone = data.countryCode + (data.countryCode ==='+880' ? (data.phone.startsWith('0') && data.phone.slice(1)) : data.phone)
+    data.phone = data.phone ? (data.countryCode + (data.countryCode ==='+880' ? (data.phone.startsWith('0') && data.phone.slice(1)) : data.phone )) : 'N/A'
     if(data.useSamePass === 'same'){
       samePass(data.password)
     }
@@ -34,7 +34,7 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
       },
       body : JSON.stringify(data)
     };
-    fetch('https://time-line-server-ashikfree999.vercel.app/password', options)
+    fetch('https://time-line-server.vercel.app/password', options)
     .then(res=>{
       if(res.status === 200){
         toggleAddPass(false);
@@ -74,17 +74,29 @@ const AddNewPassword = ({platform, member, toggleAddPass}) => {
               <input {...register('phone')} type="text" inputMode='number' placeholder='1798xxxxxxx' />
             </div>
           </div>
-          <div className="form-field">
-            <span>Username</span>
-            <input {...register('userName')} type="text" placeholder='Enter username' />
+          <div className="grid">
+            <div className="form-field">
+              <span>Username</span>
+              <input {...register('userName')} type="text" placeholder='Enter username' />
+            </div>
+            <div className="form-field">
+              <span>Password</span>
+              <input {...register('password')} required type="text" placeholder='Enter password' />
+            </div>
+          </div>
+          <div className="grid">
+            <div className="form-field">
+              <span>Security Key</span>
+              <input {...register('securityKey')} type="text" placeholder='Enter securityKey' />
+            </div>
+            <div className="form-field">
+              <span>IP:</span>
+              <input {...register('ip')} type="text" placeholder='Enter IP' />
+            </div>
           </div>
           <div className="form-field">
-            <span>Password</span>
-            <input {...register('password')} required type="text" placeholder='Enter password' />
-          </div>
-          <div className="form-field">
-            <span>Security Key</span>
-            <input {...register('securityKey')} type="text" placeholder='Enter securityKey' />
+            <span>Addional Note:</span>
+            <input {...register('note')} type="text" placeholder='Enter Note' />
           </div>
           <div className="form-field check">
             <input {...register('useSamePass')} type="checkbox" value='same' id="same" />

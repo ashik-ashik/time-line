@@ -40,8 +40,8 @@ const EditBook = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     };
-    // https://time-line-server-ashikfree999.vercel.app
-    fetch(`https://time-line-server-ashikfree999.vercel.app/books/${id}`, requestOptions)
+    // https://time-line-server.vercel.app
+    fetch(`https://time-line-server.vercel.app/books/${id}`, requestOptions)
     .then(res => res.json())
     .then(result =>  {
       if(result.modifiedCount){
@@ -52,7 +52,7 @@ const EditBook = () => {
   };
 
   useEffect(()=>{
-    fetch(`https://time-line-server-ashikfree999.vercel.app/books/${id}`)
+    fetch(`https://time-line-server.vercel.app/books/${id}`)
     .then(res=>res.json())
     .then(result => setBook(result || []))
   },[id]);

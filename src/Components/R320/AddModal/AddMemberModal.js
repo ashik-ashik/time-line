@@ -12,7 +12,7 @@ const AddMemberModal = ({setShowMemberModal, setObserveAddNewMember}) => {
       },
       body : JSON.stringify(data)
     }
-    fetch('https://time-line-server-ashikfree999.vercel.app/r320-member', options)
+    fetch('https://time-line-server.vercel.app/r320-member', options)
     .then(res=>{
       if(res.status === 200){
         setObserveAddNewMember(true);

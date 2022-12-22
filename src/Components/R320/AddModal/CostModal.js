@@ -18,7 +18,7 @@ const CostModal = ({setShowCostModal, setObserveAddNewCost}) => {
       },
       body : JSON.stringify(data)
     }
-    fetch('https://time-line-server-ashikfree999.vercel.app/r320-cost', options)
+    fetch('https://time-line-server.vercel.app/r320-cost', options)
     .then(res => {
       if(res.status === 200){
         reset();

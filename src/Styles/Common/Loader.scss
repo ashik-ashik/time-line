@@ -22,7 +22,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: load 3s ease 0s infinite forwards running;
+      animation: load 3s linear 0s infinite forwards running;
     }
     .loader-content{
       width: 90px;
